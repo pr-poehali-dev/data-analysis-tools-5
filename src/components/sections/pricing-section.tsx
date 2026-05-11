@@ -21,8 +21,10 @@ const plans = [
 
 export function PricingSection() {
   return (
-    <section className="bg-secondary px-6 py-24">
-      <div className="max-w-5xl mx-auto">
+    <section className="relative px-6 py-24 overflow-hidden" style={{ backgroundColor: "#0d0d0d" }}>
+      {/* Animated grain overlay */}
+      <div className="grain-overlay" />
+      <div className="relative z-10 max-w-5xl mx-auto">
         <motion.div
           className="text-center mb-16"
           initial={{ opacity: 0, y: 20 }}
