@@ -24,7 +24,7 @@ export function HeroSection() {
   return (
     <section
       ref={containerRef}
-      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-background px-6 py-24"
+      className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden bg-background px-6 py-24 gap-12"
     >
       {/* Stacked images */}
       <div className="relative flex items-center justify-center">
@@ -71,13 +71,14 @@ export function HeroSection() {
         </motion.div>
       </div>
 
+      {/* Title below images */}
       <motion.div
-        className="absolute inset-0 flex items-center justify-center pointer-events-none z-10"
+        className="relative z-10 text-center mt-8"
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1, delay: 0.8 }}
       >
-        <h1 className="text-5xl md:text-7xl lg:text-8xl font-serif text-center text-foreground mix-blend-difference">
+        <h1 className="text-5xl md:text-7xl lg:text-8xl font-serif text-center text-foreground">
           Каждый кадр — <em className="italic">история</em>.
         </h1>
       </motion.div>
