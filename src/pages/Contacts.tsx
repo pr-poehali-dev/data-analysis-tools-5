@@ -125,7 +125,7 @@ export default function Contacts() {
                 </div>
                 <div className="pt-6 border-t border-border">
                   <p className="text-muted-foreground text-sm leading-relaxed">
-                    Отвечаю на заявки в течение 24 часов. Съёмки провожу в Москве и выезжаю на выездные сессии.
+                    Отвечаю на заявки в течение 24 часов. Провожу съёмки в Москве и Тамбове, выезжаю на выездные сессии.
                   </p>
                 </div>
               </motion.div>
