@@ -1,53 +1,90 @@
 import { useState, useEffect } from "react"
 import { motion } from "framer-motion"
 
-function TypeTester() {
-  const [scale, setScale] = useState(1)
+function ShutterAnimation() {
+  const [open, setOpen] = useState(false)
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setScale((prev) => (prev === 1 ? 1.5 : 1))
-    }, 2000)
+      setOpen(true)
+      setTimeout(() => setOpen(false), 600)
+    }, 2200)
     return () => clearInterval(interval)
   }, [])
 
   return (
     <div className="flex items-center justify-center h-full">
-      <motion.span
-        className="font-serif text-6xl md:text-8xl text-foreground"
-        animate={{ scale }}
-        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-      >
-        Aa
-      </motion.span>
+      <div className="relative w-24 h-24 flex items-center justify-center">
+        {/* Aperture blades */}
+        {[0, 45, 90, 135].map((deg, i) => (
+          <motion.div
+            key={i}
+            className="absolute w-10 h-10 bg-foreground/15 rounded-sm origin-center"
+            style={{ rotate: deg }}
+            animate={open
+              ? { scale: 0.15, opacity: 0.2 }
+              : { scale: 1, opacity: 1 }
+            }
+            transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+          />
+        ))}
+        {/* Center dot — flash */}
+        <motion.div
+          className="absolute w-3 h-3 rounded-full bg-foreground"
+          animate={open ? { scale: 2.5, opacity: 1 } : { scale: 1, opacity: 0.4 }}
+          transition={{ duration: 0.25 }}
+        />
+      </div>
     </div>
   )
 }
 
-function LayoutAnimation() {
-  const [layout, setLayout] = useState(0)
+function MomentAnimation() {
+  const [captured, setCaptured] = useState(false)
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setLayout((prev) => (prev + 1) % 3)
+      setCaptured(true)
+      setTimeout(() => setCaptured(false), 900)
     }, 2500)
     return () => clearInterval(interval)
   }, [])
 
-  const layouts = ["grid-cols-2 grid-rows-2", "grid-cols-3 grid-rows-1", "grid-cols-1 grid-rows-3"]
-
   return (
-    <div className="h-full p-4 flex items-center justify-center">
-      <motion.div className={`grid ${layouts[layout]} gap-2 w-full max-w-[140px]`} layout>
-        {[1, 2, 3].map((i) => (
-          <motion.div
-            key={i}
-            className="bg-primary/20 rounded-md min-h-[30px]"
-            layout
-            transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-          />
+    <div className="flex flex-col items-center justify-center h-full gap-3">
+      <div className="relative w-28 h-20 rounded-lg overflow-hidden border border-foreground/20">
+        {/* Scene */}
+        <motion.div
+          className="absolute inset-0 bg-gradient-to-br from-foreground/5 to-foreground/20"
+          animate={captured ? { opacity: 0 } : { opacity: 1 }}
+          transition={{ duration: 0.1 }}
+        />
+        {/* Flash overlay */}
+        <motion.div
+          className="absolute inset-0 bg-white"
+          animate={captured ? { opacity: 0.9 } : { opacity: 0 }}
+          transition={{ duration: 0.08 }}
+        />
+        {/* Frozen frame */}
+        <motion.div
+          className="absolute inset-0 flex items-center justify-center"
+          animate={captured ? { opacity: 1 } : { opacity: 0 }}
+          transition={{ duration: 0.3, delay: 0.15 }}
+        >
+          <div className="w-8 h-8 rounded-full bg-foreground/30 border-2 border-foreground/60" />
+        </motion.div>
+        {/* Viewfinder corners */}
+        {["top-1 left-1", "top-1 right-1", "bottom-1 left-1", "bottom-1 right-1"].map((pos, i) => (
+          <div key={i} className={`absolute ${pos} w-2 h-2 border-foreground/40 ${i < 2 ? "border-t" : "border-b"} ${i % 2 === 0 ? "border-l" : "border-r"}`} />
         ))}
-      </motion.div>
+      </div>
+      <motion.span
+        className="text-xs text-muted-foreground tracking-widest uppercase"
+        animate={captured ? { opacity: 1 } : { opacity: 0.4 }}
+        transition={{ duration: 0.2 }}
+      >
+        {captured ? "Снято" : "В кадре"}
+      </motion.span>
     </div>
   )
 }
@@ -119,7 +156,7 @@ export function FeaturesSection() {
             data-clickable
           >
             <div className="flex-1">
-              <TypeTester />
+              <ShutterAnimation />
             </div>
             <div className="mt-4">
               <h3 className="font-serif text-xl text-foreground">Портретная съёмка</h3>
@@ -139,7 +176,7 @@ export function FeaturesSection() {
             data-clickable
           >
             <div className="flex-1">
-              <LayoutAnimation />
+              <MomentAnimation />
             </div>
             <div className="mt-4">
               <h3 className="font-serif text-xl text-foreground">Репортажная съёмка</h3>
