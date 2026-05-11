@@ -2,9 +2,9 @@ import { useRef } from "react"
 import { motion, useScroll, useTransform } from "framer-motion"
 
 const images = [
-  "/fashion-model-editorial-portrait-dramatic-lighting.jpg",
-  "/fashion-photography-editorial-black-and-white.jpg",
-  "/interior-design-minimalist-living-room-natural-lig.jpg",
+  "https://cdn.poehali.dev/projects/c71e270c-21b3-4982-a23f-edd51568962c/bucket/4766bad7-fbd3-4de0-9af9-f380b3be2ae6.jpg",
+  "https://cdn.poehali.dev/projects/c71e270c-21b3-4982-a23f-edd51568962c/bucket/4766bad7-fbd3-4de0-9af9-f380b3be2ae6.jpg",
+  "https://cdn.poehali.dev/projects/c71e270c-21b3-4982-a23f-edd51568962c/bucket/4766bad7-fbd3-4de0-9af9-f380b3be2ae6.jpg",
 ]
 
 export function HeroSection() {
