@@ -52,26 +52,43 @@ function LayoutAnimation() {
   )
 }
 
-function SpeedIndicator() {
-  const [progress, setProgress] = useState(0)
+function BusyIndicator() {
+  const levels = ["Низкая", "Средняя", "Высокая"]
+  const [level, setLevel] = useState(0)
 
   useEffect(() => {
-    const timeout = setTimeout(() => setProgress(100), 500)
-    return () => clearTimeout(timeout)
+    const interval = setInterval(() => {
+      setLevel((prev) => (prev + 1) % 3)
+    }, 2000)
+    return () => clearInterval(interval)
   }, [])
+
+  const bars = [3, 5, 4, 7, 3, 6, 4, 5, 7, 3]
 
   return (
     <div className="flex flex-col items-center justify-center h-full gap-4">
-      <span className="text-3xl md:text-4xl font-sans font-medium text-foreground">100ms</span>
-      <span className="text-sm text-muted-foreground">Загрузка</span>
-      <div className="w-full max-w-[120px] h-1.5 bg-foreground/10 rounded-full overflow-hidden">
-        <motion.div
-          className="h-full bg-primary rounded-full"
-          initial={{ width: 0 }}
-          animate={{ width: `${progress}%` }}
-          transition={{ duration: 0.1 }}
-        />
+      <div className="flex items-end gap-1 h-14">
+        {bars.map((h, i) => (
+          <motion.div
+            key={i}
+            className="w-2.5 rounded-sm bg-primary/60"
+            animate={{
+              height: level === 0 ? h * 3 : level === 1 ? h * 5 : h * 7,
+              opacity: level === 0 ? 0.4 : level === 1 ? 0.7 : 1,
+            }}
+            transition={{ duration: 0.6, delay: i * 0.05, ease: [0.16, 1, 0.3, 1] }}
+          />
+        ))}
       </div>
+      <motion.span
+        key={level}
+        className="text-sm text-muted-foreground"
+        initial={{ opacity: 0, y: 4 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.3 }}
+      >
+        Загруженность: {levels[level]}
+      </motion.span>
     </div>
   )
 }
@@ -142,11 +159,11 @@ export function FeaturesSection() {
             data-clickable
           >
             <div className="flex-1">
-              <SpeedIndicator />
+              <BusyIndicator />
             </div>
             <div className="mt-4">
-              <h3 className="font-serif text-xl text-foreground">Быстрая обработка</h3>
-              <p className="text-muted-foreground text-sm mt-1">Готовые фото уже через 48 часов после съёмки.</p>
+              <h3 className="font-serif text-xl text-foreground">Сроки обработки</h3>
+              <p className="text-muted-foreground text-sm mt-1">Готовность фотографий зависит от загруженности в конкретный период.</p>
             </div>
           </motion.div>
         </div>
