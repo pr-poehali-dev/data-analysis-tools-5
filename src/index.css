@@ -11,8 +11,8 @@
     --foreground: 0 0% 96%;
     --surface: 0 0% 8%;
     --ink: 0 0% 96%;
-    --iris: 263 70% 60%;
-    --lilac: 270 60% 70%;
+    --iris: 350 65% 35%;
+    --lilac: 350 50% 45%;
     --lime: 82 85% 70%;
     --muted-foreground: 0 0% 55%;
 
@@ -20,7 +20,7 @@
     --card-foreground: 0 0% 96%;
     --popover: 0 0% 8%;
     --popover-foreground: 0 0% 96%;
-    --primary: 263 70% 60%;
+    --primary: 350 65% 35%;
     --primary-foreground: 0 0% 96%;
     --secondary: 0 0% 10%;
     --secondary-foreground: 0 0% 96%;
@@ -31,7 +31,7 @@
     --destructive-foreground: 210 40% 98%;
     --border: 0 0% 14%;
     --input: 0 0% 14%;
-    --ring: 263 70% 60%;
+    --ring: 350 65% 35%;
 
     --radius: 0.75rem;
 
