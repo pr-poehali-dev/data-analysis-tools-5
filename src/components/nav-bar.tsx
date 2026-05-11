@@ -39,7 +39,7 @@ export function NavBar() {
             src="https://cdn.poehali.dev/projects/c71e270c-21b3-4982-a23f-edd51568962c/bucket/e06eb1cc-e3c5-47a7-92af-b5ee16c04c8d.png"
             alt="Настасья"
             className="h-10 w-auto"
-            style={{ mixBlendMode: "screen", filter: "invert(1)" }}
+            style={{ mixBlendMode: "screen", filter: "invert(1) brightness(2)" }}
           />
         </Link>
 
