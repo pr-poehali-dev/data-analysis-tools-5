@@ -12,29 +12,29 @@ const photos = [
     title: "Образ",
   },
   {
+    src: "https://cdn.poehali.dev/projects/c71e270c-21b3-4982-a23f-edd51568962c/bucket/7ed88183-9088-469b-b91f-257427ff462c.jpg",
+    category: "Студия",
+    title: "Тень",
+  },
+  {
+    src: "https://cdn.poehali.dev/projects/c71e270c-21b3-4982-a23f-edd51568962c/bucket/cd1341d4-31de-4690-b2bb-87f16fb58590.jpg",
+    category: "Портрет",
+    title: "Лилии",
+  },
+  {
+    src: "https://cdn.poehali.dev/projects/c71e270c-21b3-4982-a23f-edd51568962c/bucket/c29dacc2-87b5-477b-877d-f89514aa2134.jpg",
+    category: "Мода",
+    title: "Синева",
+  },
+  {
+    src: "https://cdn.poehali.dev/projects/c71e270c-21b3-4982-a23f-edd51568962c/bucket/4bc47e73-5462-495a-8319-73d524a8d228.jpg",
+    category: "Портрет",
+    title: "Мечта",
+  },
+  {
     src: "/fashion-photography-editorial-black-and-white.jpg",
     category: "Мода",
     title: "Редакция",
-  },
-  {
-    src: "/fashion-model-editorial-portrait-dramatic-lighting.jpg",
-    category: "Портрет",
-    title: "Драматика",
-  },
-  {
-    src: "/interior-design-minimalist-living-room-natural-lig.jpg",
-    category: "Интерьер",
-    title: "Свет",
-  },
-  {
-    src: "/modern-architecture-building-exterior-minimal.jpg",
-    category: "Архитектура",
-    title: "Минимализм",
-  },
-  {
-    src: "/minimal-architecture-portfolio-with-clean-lines.jpg",
-    category: "Архитектура",
-    title: "Линии",
   },
 ]
 
