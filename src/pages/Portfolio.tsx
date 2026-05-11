@@ -32,7 +32,7 @@ const photos = [
     title: "Мечта",
   },
   {
-    src: "/fashion-photography-editorial-black-and-white.jpg",
+    src: "https://cdn.poehali.dev/projects/c71e270c-21b3-4982-a23f-edd51568962c/bucket/6974ef29-f31a-436e-aa87-59982a5b4e51.jpg",
     category: "Мода",
     title: "Редакция",
   },
