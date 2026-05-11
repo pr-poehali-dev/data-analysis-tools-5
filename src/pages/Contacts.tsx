@@ -111,8 +111,8 @@ export default function Contacts() {
                 </div>
                 <div>
                   <p className="text-xs uppercase tracking-widest text-muted-foreground mb-2">Email</p>
-                  <a href="mailto:photo@example.com" className="font-serif text-2xl text-foreground hover:text-primary transition-colors">
-                    photo@example.com
+                  <a href="mailto:andreevnnnna@mail.ru" className="font-serif text-2xl text-foreground hover:text-primary transition-colors">
+                    andreevnnnna@mail.ru
                   </a>
                 </div>
                 <div>
