@@ -34,13 +34,8 @@ export function NavBar() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
       >
-        <Link to="/" data-clickable>
-          <img
-            src="https://cdn.poehali.dev/projects/c71e270c-21b3-4982-a23f-edd51568962c/bucket/e06eb1cc-e3c5-47a7-92af-b5ee16c04c8d.png"
-            alt="Настасья"
-            className="h-10 w-auto"
-            style={{ mixBlendMode: "screen", filter: "invert(1) brightness(2)" }}
-          />
+        <Link to="/" className="font-serif text-xl text-foreground tracking-tight" data-clickable>
+          PS.НАСТАСЬЯ
         </Link>
 
         {/* Desktop nav */}

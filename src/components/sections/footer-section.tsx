@@ -23,18 +23,14 @@ export function FooterSection() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-end">
           {/* Logo and links */}
           <div>
-            <motion.div
+            <motion.h2
+              className="text-6xl md:text-8xl font-serif text-foreground"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
             >
-              <img
-                src="https://cdn.poehali.dev/projects/c71e270c-21b3-4982-a23f-edd51568962c/bucket/e06eb1cc-e3c5-47a7-92af-b5ee16c04c8d.png"
-                alt="Настасья"
-                className="h-24 md:h-36 w-auto"
-                style={{ mixBlendMode: "screen", filter: "invert(1) brightness(2)" }}
-              />
-            </motion.div>
+              PS.НАСТАСЬЯ
+            </motion.h2>
 
             <nav className="flex flex-wrap gap-6 mt-8">
               {footerLinks.map((link, i) => (
