@@ -23,14 +23,18 @@ export function FooterSection() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-end">
           {/* Logo and links */}
           <div>
-            <motion.h2
-              className="text-6xl md:text-8xl font-serif text-foreground"
+            <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
             >
-              PHOTO.
-            </motion.h2>
+              <img
+                src="https://cdn.poehali.dev/projects/c71e270c-21b3-4982-a23f-edd51568962c/bucket/e06eb1cc-e3c5-47a7-92af-b5ee16c04c8d.png"
+                alt="Настасья"
+                className="h-24 md:h-36 w-auto"
+                style={{ mixBlendMode: "screen", filter: "invert(1)" }}
+              />
+            </motion.div>
 
             <nav className="flex flex-wrap gap-6 mt-8">
               {footerLinks.map((link, i) => (
@@ -73,7 +77,7 @@ export function FooterSection() {
         </div>
 
         <div className="mt-16 pt-8 border-t border-border flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-muted-foreground text-sm">2025 Фотограф. Все права защищены.</p>
+          <p className="text-muted-foreground text-sm">2025 Настасья. Все права защищены.</p>
           <div className="flex gap-6">
             <a href="#" className="text-muted-foreground hover:text-foreground text-sm" data-clickable>
               Конфиденциальность
