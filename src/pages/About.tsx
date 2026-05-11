@@ -54,7 +54,7 @@ export default function About() {
                 transition={{ duration: 1.2, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
               >
                 <img
-                  src="https://cdn.poehali.dev/projects/c71e270c-21b3-4982-a23f-edd51568962c/bucket/4766bad7-fbd3-4de0-9af9-f380b3be2ae6.jpg"
+                  src="https://cdn.poehali.dev/projects/c71e270c-21b3-4982-a23f-edd51568962c/bucket/fb1d8442-60d5-4ad8-84a1-52d3fbf40e90.jpg"
                   alt="Фотограф"
                   className="w-full h-full object-cover"
                 />
