@@ -1,6 +1,60 @@
 import { useState } from "react"
 import { motion } from "framer-motion"
 import { ArrowRight } from "lucide-react"
+import { useEffect, useRef } from "react"
+
+function FilmGrain() {
+  const canvasRef = useRef<HTMLCanvasElement>(null)
+
+  useEffect(() => {
+    const canvas = canvasRef.current
+    if (!canvas) return
+    const ctx = canvas.getContext("2d")
+    if (!ctx) return
+
+    let raf: number
+
+    const draw = () => {
+      const w = canvas.width
+      const h = canvas.height
+      const imageData = ctx.createImageData(w, h)
+      const data = imageData.data
+
+      for (let i = 0; i < data.length; i += 4) {
+        const v = Math.random() * 255
+        data[i] = v
+        data[i + 1] = v
+        data[i + 2] = v
+        data[i + 3] = Math.random() * 28 + 8
+      }
+
+      ctx.putImageData(imageData, 0, 0)
+      raf = requestAnimationFrame(draw)
+    }
+
+    const resize = () => {
+      canvas.width = canvas.offsetWidth
+      canvas.height = canvas.offsetHeight
+    }
+
+    resize()
+    draw()
+
+    window.addEventListener("resize", resize)
+    return () => {
+      cancelAnimationFrame(raf)
+      window.removeEventListener("resize", resize)
+    }
+  }, [])
+
+  return (
+    <canvas
+      ref={canvasRef}
+      className="absolute inset-0 w-full h-full pointer-events-none"
+      style={{ zIndex: 1, mixBlendMode: "overlay" }}
+    />
+  )
+}
 
 const footerLinks = [
   { label: "Портфолио", href: "#" },
@@ -13,13 +67,14 @@ export function FooterSection() {
   const [email, setEmail] = useState("")
 
   return (
-    <footer className="relative bg-background px-6 py-24 overflow-hidden">
+    <footer className="relative bg-black px-6 py-24 overflow-hidden">
+      <FilmGrain />
       {/* Gradient blob */}
       <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[800px] h-[600px] pointer-events-none">
-        <div className="absolute inset-0 bg-gradient-to-tr from-red-900 via-red-800 to-red-950 opacity-30 blur-3xl rounded-full" />
+        <div className="absolute inset-0 bg-gradient-to-tr from-red-900 via-red-800 to-red-950 opacity-20 blur-3xl rounded-full" />
       </div>
 
-      <div className="relative max-w-6xl mx-auto">
+      <div className="relative max-w-6xl mx-auto" style={{ zIndex: 2 }}>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-end">
           {/* Logo and links */}
           <div>
