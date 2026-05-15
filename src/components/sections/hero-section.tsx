@@ -26,19 +26,6 @@ export function HeroSection() {
       ref={containerRef}
       className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden bg-background px-6 py-24 gap-12"
     >
-      {/* Metallic lily background */}
-      <div
-        className="absolute inset-0 flex items-center justify-center pointer-events-none"
-        style={{ zIndex: 0 }}
-      >
-        <img
-          src="https://cdn.poehali.dev/projects/c71e270c-21b3-4982-a23f-edd51568962c/files/3c3355f2-cb73-4208-9390-9719842cec74.jpg"
-          alt=""
-          className="w-[600px] md:w-[800px] object-contain select-none"
-          style={{ opacity: 0.07, mixBlendMode: "screen" }}
-        />
-      </div>
-
       {/* Stacked images */}
       <div className="relative flex items-center justify-center">
         <motion.div
