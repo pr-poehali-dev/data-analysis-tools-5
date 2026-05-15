@@ -3,14 +3,14 @@ import { Check } from "lucide-react"
 
 const plans = [
   {
-    name: "Портрет",
+    name: "Индивидуальная",
     price: "8 000",
     period: " руб",
     description: "Индивидуальная фотосессия",
     features: ["2 часа съёмки", "30 обработанных фото", "Онлайн-галерея", "Передача прав"],
   },
   {
-    name: "История",
+    name: "Парная",
     price: "18 000",
     period: " руб",
     description: "Расширенная съёмка",
