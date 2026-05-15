@@ -1,6 +1,7 @@
 import { LenisProvider } from "@/components/lenis-provider"
 import { CustomCursor } from "@/components/custom-cursor"
 import { NavBar } from "@/components/nav-bar"
+import { BgAnimation } from "@/components/bg-animation"
 import { HeroSection } from "@/components/sections/hero-section"
 import { ManifestoSection } from "@/components/sections/manifesto-section"
 import { FeaturesSection } from "@/components/sections/features-section"
@@ -14,6 +15,7 @@ const Index = () => {
   return (
     <LenisProvider>
       <main className="custom-cursor bg-background">
+        <BgAnimation />
         <CustomCursor />
         <NavBar />
         <HeroSection />
