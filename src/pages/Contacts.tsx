@@ -104,12 +104,6 @@ export default function Contacts() {
                 className="space-y-10"
               >
                 <div>
-                  <p className="text-xs uppercase tracking-widest text-muted-foreground mb-2">Телефон</p>
-                  <a href="tel:+79990000000" className="font-serif text-2xl text-foreground hover:text-primary transition-colors">
-                    +7 999 000 00 00
-                  </a>
-                </div>
-                <div>
                   <p className="text-xs uppercase tracking-widest text-muted-foreground mb-2">Email</p>
                   <a href="mailto:andreevnnnna@mail.ru" className="font-serif text-2xl text-foreground hover:text-primary transition-colors">
                     andreevnnnna@mail.ru
