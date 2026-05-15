@@ -118,9 +118,8 @@ export default function Contacts() {
                 <div>
                   <p className="text-xs uppercase tracking-widest text-muted-foreground mb-3">Соцсети</p>
                   <div className="flex gap-6">
-                    <a href="#" className="text-muted-foreground hover:text-foreground transition-colors" data-clickable>Instagram</a>
                     <a href="#" className="text-muted-foreground hover:text-foreground transition-colors" data-clickable>Telegram</a>
-                    <a href="#" className="text-muted-foreground hover:text-foreground transition-colors" data-clickable>VK</a>
+                    <a href="https://vk.com/phmixxnsss" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground transition-colors" data-clickable>VK</a>
                   </div>
                 </div>
                 <div className="pt-6 border-t border-border">
