@@ -1,5 +1,6 @@
 import { motion } from "framer-motion"
 import { Check } from "lucide-react"
+import { useNavigate } from "react-router-dom"
 
 const plans = [
   {
@@ -20,6 +21,8 @@ const plans = [
 ]
 
 export function PricingSection() {
+  const navigate = useNavigate()
+
   return (
     <section className="relative px-6 py-24 overflow-hidden" style={{ backgroundColor: "#0d0d0d" }}>
       {/* Animated grain overlay */}
@@ -71,6 +74,7 @@ export function PricingSection() {
               </ul>
 
               <button
+                onClick={() => navigate("/contacts")}
                 className={`w-full mt-8 py-3 px-6 rounded-lg font-medium transition-colors ${
                   plan.popular
                     ? "bg-primary text-primary-foreground hover:bg-primary/90"
