@@ -86,6 +86,26 @@ const photos = [
     category: "Студия",
     title: "Чёрное",
   },
+  {
+    src: "https://cdn.poehali.dev/projects/c71e270c-21b3-4982-a23f-edd51568962c/bucket/b35d251e-2e78-4fda-a909-b2d97dc31b28.jpg",
+    category: "Студия",
+    title: "Розовый",
+  },
+  {
+    src: "https://cdn.poehali.dev/projects/c71e270c-21b3-4982-a23f-edd51568962c/bucket/6ca5fa31-6207-4b4a-b4dd-2df8bf99842b.jpg",
+    category: "Студия",
+    title: "Алый",
+  },
+  {
+    src: "https://cdn.poehali.dev/projects/c71e270c-21b3-4982-a23f-edd51568962c/bucket/d5bd0188-f6c3-4afc-8fab-2a193af73d7d.jpg",
+    category: "Портрет",
+    title: "Лилия",
+  },
+  {
+    src: "https://cdn.poehali.dev/projects/c71e270c-21b3-4982-a23f-edd51568962c/bucket/100f1918-9843-438f-a9a0-68652bce276b.jpg",
+    category: "Студия",
+    title: "Перья",
+  },
 ]
 
 function PhotoCard({ photo, index }: { photo: typeof photos[0]; index: number }) {
