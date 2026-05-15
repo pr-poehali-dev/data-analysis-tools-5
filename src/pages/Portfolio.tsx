@@ -42,7 +42,7 @@ const photos = [
     title: "Шёлк",
   },
   {
-    src: "https://cdn.poehali.dev/projects/c71e270c-21b3-4982-a23f-edd51568962c/bucket/171d7322-5e3e-4808-aa38-5a9943ed57d5.jpg",
+    src: "https://cdn.poehali.dev/projects/c71e270c-21b3-4982-a23f-edd51568962c/bucket/6f2f8498-5c24-4f6a-acee-7e0d879b5da1.jpg",
     category: "Студия",
     title: "Красный",
   },
