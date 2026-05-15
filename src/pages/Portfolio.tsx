@@ -56,6 +56,16 @@ const photos = [
     category: "Мода",
     title: "Стрит",
   },
+  {
+    src: "https://cdn.poehali.dev/projects/c71e270c-21b3-4982-a23f-edd51568962c/bucket/2fd10725-42c0-4246-8278-d8d9d8744f6c.jpg",
+    category: "Портрет",
+    title: "Ветер",
+  },
+  {
+    src: "https://cdn.poehali.dev/projects/c71e270c-21b3-4982-a23f-edd51568962c/bucket/e01a2e97-4ab0-4db6-b199-374f26f6a686.jpg",
+    category: "Мода",
+    title: "Монохром",
+  },
 ]
 
 function PhotoCard({ photo, index }: { photo: typeof photos[0]; index: number }) {
