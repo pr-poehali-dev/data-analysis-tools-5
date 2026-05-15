@@ -1,5 +1,6 @@
 import { useRef } from "react"
 import { motion, useScroll, useTransform } from "framer-motion"
+import { useNavigate } from "react-router-dom"
 
 const images = [
   "https://cdn.poehali.dev/projects/c71e270c-21b3-4982-a23f-edd51568962c/bucket/58f756bb-3a35-41b5-ac7f-2e2c58d9ba36.jpg",
@@ -8,6 +9,7 @@ const images = [
 ]
 
 export function HeroSection() {
+  const navigate = useNavigate()
   const containerRef = useRef<HTMLDivElement>(null)
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -81,6 +83,16 @@ export function HeroSection() {
         <h1 className="text-5xl md:text-7xl lg:text-8xl font-serif text-center text-foreground">
           Каждый кадр — <em className="italic">история</em>.
         </h1>
+        <motion.button
+          onClick={() => navigate("/portfolio")}
+          className="mt-8 px-8 py-3 rounded-full border border-foreground/30 text-foreground/70 text-sm uppercase tracking-widest hover:border-foreground hover:text-foreground transition-colors"
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, delay: 1.1 }}
+          data-clickable
+        >
+          Портфолио
+        </motion.button>
       </motion.div>
 
       <motion.div
