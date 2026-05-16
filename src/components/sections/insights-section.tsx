@@ -1,7 +1,7 @@
 import type React from "react"
 import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { ArrowRight } from "lucide-react"
+import { Plus } from "lucide-react"
 
 const articles = [
   {
@@ -89,10 +89,10 @@ export function InsightsSection() {
                   data-clickable
                 >
                   <motion.div
-                    animate={article.answer && openIndex === i ? { rotate: 90 } : { rotate: 0 }}
-                    transition={{ duration: 0.25 }}
+                    animate={article.answer && openIndex === i ? { rotate: 45 } : { rotate: 0 }}
+                    transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
                   >
-                    <ArrowRight className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors" />
+                    <Plus className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors" />
                   </motion.div>
                 </button>
               </div>
