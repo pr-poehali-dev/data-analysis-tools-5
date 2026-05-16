@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from "framer-motion"
 const services = [
   {
     title: "Портретная съёмка",
-    description: "Классические портреты, арт-концепции и много интересного.",
+    description: "Студийные и уличные портреты, арт-концепции, образы — каждый формат под твою идею.",
     tag: "Portrait",
   },
   {
