@@ -192,9 +192,7 @@ function EnvelopeCard({ title, description, tag, index }: { title: string; descr
         </AnimatePresence>
       </div>
 
-      <div className="mt-3 text-center">
-        <p className="font-serif text-foreground text-sm tracking-wide">{title}</p>
-      </div>
+
     </motion.div>
   )
 }
