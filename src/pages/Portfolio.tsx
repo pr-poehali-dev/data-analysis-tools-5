@@ -116,6 +116,11 @@ const photos = [
     category: "Мода",
     title: "Белый мех",
   },
+  {
+    src: "https://cdn.poehali.dev/projects/c71e270c-21b3-4982-a23f-edd51568962c/bucket/23ab7731-2525-44e8-9c1f-18047ba4a73e.jpg",
+    category: "Студия",
+    title: "Огонь",
+  },
 ]
 
 function PhotoCard({ photo, index }: { photo: typeof photos[0]; index: number }) {
