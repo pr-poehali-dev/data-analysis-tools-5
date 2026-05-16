@@ -19,13 +19,38 @@ const services = [
   },
 ]
 
+const LilySvg = ({ stroke = "hsl(0 0% 15%)", opacity = 0.18 }) => (
+  <svg width="72" height="72" viewBox="0 0 64 64" fill="none" style={{ opacity }}>
+    <g stroke={stroke} strokeWidth="0.9" fill="none">
+      <ellipse cx="32" cy="21" rx="3.5" ry="10" transform="rotate(0 32 32)" />
+      <ellipse cx="32" cy="21" rx="3.5" ry="10" transform="rotate(60 32 32)" />
+      <ellipse cx="32" cy="21" rx="3.5" ry="10" transform="rotate(120 32 32)" />
+      <ellipse cx="32" cy="21" rx="3.5" ry="10" transform="rotate(180 32 32)" />
+      <ellipse cx="32" cy="21" rx="3.5" ry="10" transform="rotate(240 32 32)" />
+      <ellipse cx="32" cy="21" rx="3.5" ry="10" transform="rotate(300 32 32)" />
+      <circle cx="32" cy="32" r="2.5" />
+      <line x1="32" y1="34.5" x2="32" y2="54" />
+      <path d="M32 46 Q21 40 23 31" />
+      <path d="M32 46 Q43 40 41 31" />
+      {/* lace dots */}
+      <circle cx="16" cy="16" r="1" fill={stroke} />
+      <circle cx="48" cy="16" r="1" fill={stroke} />
+      <circle cx="10" cy="32" r="1" fill={stroke} />
+      <circle cx="54" cy="32" r="1" fill={stroke} />
+      <path d="M12 12 Q16 8 20 12" />
+      <path d="M44 12 Q48 8 52 12" />
+      <path d="M6 28 Q6 24 10 24" />
+      <path d="M54 24 Q58 24 58 28" />
+    </g>
+  </svg>
+)
+
 function EnvelopeCard({ title, description, tag, index }: { title: string; description: string; tag: string; index: number }) {
   const [hovered, setHovered] = useState(false)
 
   return (
     <motion.div
       className="relative cursor-pointer select-none"
-      style={{ perspective: 800 }}
       onHoverStart={() => setHovered(true)}
       onHoverEnd={() => setHovered(false)}
       initial={{ opacity: 0, y: 40 }}
@@ -33,186 +58,147 @@ function EnvelopeCard({ title, description, tag, index }: { title: string; descr
       viewport={{ once: true }}
       transition={{ duration: 0.8, delay: index * 0.12, ease: [0.16, 1, 0.3, 1] }}
     >
-      {/* Paper sliding out */}
+      {/* === PAPER — slides upward, always above envelope === */}
       <motion.div
-        className="absolute inset-x-3 bottom-4 z-10 origin-bottom"
-        animate={hovered ? { y: -110, rotateX: 2 } : { y: 0, rotateX: 0 }}
-        transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
+        className="absolute inset-x-4 z-30"
+        style={{ bottom: 0 }}
+        animate={hovered ? { y: -170 } : { y: 0 }}
+        transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
       >
         <div
-          className="relative rounded-sm overflow-hidden"
+          className="relative rounded-sm"
           style={{
-            background: "hsl(40 20% 94%)",
-            boxShadow: "0 2px 24px rgba(0,0,0,0.45)",
+            background: "hsl(40 25% 97%)",
+            boxShadow: "0 8px 32px rgba(0,0,0,0.22)",
+            borderLeft: "1px solid hsl(40 10% 88%)",
+            borderRight: "1px solid hsl(40 10% 88%)",
+            borderTop: "1px solid hsl(40 10% 88%)",
           }}
         >
-          {/* Paper texture lines */}
-          <div className="absolute inset-0 opacity-[0.07]"
+          {/* Ruled lines texture */}
+          <div
+            className="absolute inset-0 rounded-sm pointer-events-none"
             style={{
-              backgroundImage: "repeating-linear-gradient(0deg, transparent, transparent 18px, hsl(0 0% 30%) 18px, hsl(0 0% 30%) 19px)",
+              backgroundImage: "repeating-linear-gradient(0deg, transparent, transparent 22px, hsl(220 20% 88%) 22px, hsl(220 20% 88%) 23px)",
+              opacity: 0.35,
             }}
           />
-
-          {/* Paper content */}
-          <div className="relative px-6 pt-5 pb-6">
+          <div className="relative px-6 pt-6 pb-8">
             <p
-              className="text-[10px] uppercase tracking-[0.2em] mb-3"
-              style={{ color: "hsl(350 30% 35%)", fontFamily: "serif" }}
+              className="text-[9px] uppercase tracking-[0.25em] mb-3"
+              style={{ color: "hsl(350 40% 38%)", fontFamily: "serif" }}
             >
               {tag}
             </p>
             <h3
               className="font-serif text-xl leading-snug mb-2"
-              style={{ color: "hsl(0 0% 10%)" }}
+              style={{ color: "hsl(0 0% 8%)" }}
             >
               {title}
             </h3>
-            <p className="text-xs leading-relaxed" style={{ color: "hsl(0 0% 35%)" }}>
+            <p
+              className="text-sm leading-relaxed"
+              style={{ color: "hsl(0 0% 28%)" }}
+            >
               {description}
             </p>
-
-            {/* Decorative lace / lily SVG */}
-            <svg
-              className="absolute bottom-3 right-4 opacity-20"
-              width="64"
-              height="64"
-              viewBox="0 0 64 64"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              {/* Lily flower */}
-              <g stroke="hsl(0 0% 10%)" strokeWidth="0.8" fill="none">
-                {/* Petals */}
-                <ellipse cx="32" cy="22" rx="4" ry="10" transform="rotate(0 32 32)" />
-                <ellipse cx="32" cy="22" rx="4" ry="10" transform="rotate(60 32 32)" />
-                <ellipse cx="32" cy="22" rx="4" ry="10" transform="rotate(120 32 32)" />
-                <ellipse cx="32" cy="22" rx="4" ry="10" transform="rotate(180 32 32)" />
-                <ellipse cx="32" cy="22" rx="4" ry="10" transform="rotate(240 32 32)" />
-                <ellipse cx="32" cy="22" rx="4" ry="10" transform="rotate(300 32 32)" />
-                {/* Center */}
-                <circle cx="32" cy="32" r="3" />
-                {/* Stem */}
-                <line x1="32" y1="35" x2="32" y2="56" />
-                {/* Leaves */}
-                <path d="M32 46 Q20 40 22 32" />
-                <path d="M32 46 Q44 40 42 32" />
-                {/* Lace dots around */}
-                <circle cx="18" cy="18" r="1" fill="hsl(0 0% 10%)" />
-                <circle cx="46" cy="18" r="1" fill="hsl(0 0% 10%)" />
-                <circle cx="12" cy="32" r="1" fill="hsl(0 0% 10%)" />
-                <circle cx="52" cy="32" r="1" fill="hsl(0 0% 10%)" />
-                {/* Lace arcs */}
-                <path d="M14 14 Q18 10 22 14" />
-                <path d="M42 14 Q46 10 50 14" />
-                <path d="M8 28 Q8 24 12 24" />
-                <path d="M52 24 Q56 24 56 28" />
-              </g>
-            </svg>
+            {/* Lily in corner of paper */}
+            <div className="absolute bottom-2 right-3">
+              <LilySvg opacity={0.15} />
+            </div>
           </div>
         </div>
       </motion.div>
 
-      {/* Envelope body */}
+      {/* === ENVELOPE === */}
       <div
         className="relative rounded-xl overflow-hidden"
         style={{
-          background: "hsl(0 0% 10%)",
-          border: "1px solid hsl(0 0% 18%)",
-          minHeight: 220,
+          background: "hsl(40 15% 96%)",
+          border: "1px solid hsl(40 10% 82%)",
+          minHeight: 200,
         }}
       >
-        {/* Envelope back flap (top triangle) */}
+        {/* Top back flap */}
         <div
-          className="absolute inset-x-0 top-0 h-24 z-20"
+          className="absolute inset-x-0 top-0 z-10"
           style={{
-            background: "hsl(0 0% 8%)",
+            height: 100,
+            background: "hsl(40 12% 91%)",
             clipPath: "polygon(0 0, 100% 0, 50% 100%)",
-            borderBottom: "1px solid hsl(0 0% 18%)",
+            borderBottom: "1px solid hsl(40 10% 80%)",
           }}
         />
 
-        {/* Lace border pattern top */}
-        <svg className="absolute top-0 inset-x-0 w-full z-30 opacity-30" height="28" viewBox="0 0 300 28" preserveAspectRatio="none">
-          <g stroke="hsl(0 0% 60%)" strokeWidth="0.6" fill="none">
-            {Array.from({ length: 20 }).map((_, i) => (
+        {/* Lace trim along top edge */}
+        <svg
+          className="absolute top-0 inset-x-0 w-full z-20"
+          height="20"
+          viewBox="0 0 300 20"
+          preserveAspectRatio="none"
+        >
+          <g stroke="hsl(350 20% 60%)" strokeWidth="0.5" fill="none" opacity="0.5">
+            {Array.from({ length: 25 }).map((_, i) => (
               <g key={i}>
-                <circle cx={i * 15 + 7} cy="8" r="4" />
-                <line x1={i * 15 + 7} y1="12" x2={i * 15 + 7} y2="20" />
-                <path d={`M${i * 15} 20 Q${i * 15 + 7} 28 ${i * 15 + 15} 20`} />
+                <circle cx={i * 12 + 6} cy="6" r="3" />
+                <path d={`M${i * 12} 9 Q${i * 12 + 6} 16 ${i * 12 + 12} 9`} />
               </g>
             ))}
           </g>
         </svg>
 
-        {/* Envelope interior — where paper slides from */}
-        <div className="relative z-10 pt-24 pb-6 px-6">
-          {/* Lily decoration on envelope */}
-          <svg
-            className="mx-auto mb-4 opacity-25"
-            width="56"
-            height="56"
-            viewBox="0 0 64 64"
-            fill="none"
-          >
-            <g stroke="hsl(0 0% 80%)" strokeWidth="0.7" fill="none">
-              <ellipse cx="32" cy="20" rx="3.5" ry="9" transform="rotate(0 32 32)" />
-              <ellipse cx="32" cy="20" rx="3.5" ry="9" transform="rotate(72 32 32)" />
-              <ellipse cx="32" cy="20" rx="3.5" ry="9" transform="rotate(144 32 32)" />
-              <ellipse cx="32" cy="20" rx="3.5" ry="9" transform="rotate(216 32 32)" />
-              <ellipse cx="32" cy="20" rx="3.5" ry="9" transform="rotate(288 32 32)" />
-              <circle cx="32" cy="32" r="2.5" />
-              <line x1="32" y1="34.5" x2="32" y2="52" />
-              <path d="M32 44 Q22 39 24 32" />
-              <path d="M32 44 Q42 39 40 32" />
-            </g>
-          </svg>
-
-          {/* Bottom diagonal fold lines */}
-          <div className="flex items-end justify-between mt-4">
-            <div className="h-px flex-1 opacity-20" style={{ background: "hsl(0 0% 50%)" }} />
-            <span className="text-[9px] tracking-[0.25em] uppercase mx-3 opacity-30" style={{ color: "hsl(0 0% 70%)", fontFamily: "serif" }}>
+        {/* Center of envelope — lily decoration */}
+        <div className="relative z-10 pt-24 pb-8 flex flex-col items-center">
+          <LilySvg stroke="hsl(0 0% 30%)" opacity={0.2} />
+          <div className="flex items-center gap-3 mt-3 w-full px-6">
+            <div className="h-px flex-1" style={{ background: "hsl(0 0% 60%)", opacity: 0.3 }} />
+            <span
+              className="text-[8px] tracking-[0.3em] uppercase"
+              style={{ color: "hsl(0 0% 45%)", fontFamily: "serif", opacity: 0.6 }}
+            >
               Pour toi
             </span>
-            <div className="h-px flex-1 opacity-20" style={{ background: "hsl(0 0% 50%)" }} />
+            <div className="h-px flex-1" style={{ background: "hsl(0 0% 60%)", opacity: 0.3 }} />
           </div>
         </div>
 
-        {/* Bottom left & right flap lines */}
+        {/* Bottom flap */}
         <div
-          className="absolute bottom-0 left-0 right-0 h-16 z-20 pointer-events-none"
+          className="absolute bottom-0 inset-x-0 z-10 pointer-events-none"
           style={{
-            background: "hsl(0 0% 9%)",
+            height: 80,
+            background: "hsl(40 12% 93%)",
             clipPath: "polygon(0 100%, 50% 0, 100% 100%)",
-            borderTop: "1px solid hsl(0 0% 18%)",
+            borderTop: "1px solid hsl(40 10% 80%)",
           }}
         />
 
         {/* Wax seal */}
         <motion.div
-          className="absolute bottom-4 left-1/2 -translate-x-1/2 z-30 w-9 h-9 rounded-full flex items-center justify-center"
+          className="absolute bottom-3 left-1/2 -translate-x-1/2 z-20 w-10 h-10 rounded-full flex items-center justify-center"
           style={{
-            background: "hsl(350 65% 28%)",
-            border: "1px solid hsl(350 50% 40%)",
-            boxShadow: "0 0 10px hsl(350 65% 20%)",
+            background: "hsl(350 60% 30%)",
+            border: "1.5px solid hsl(350 40% 45%)",
+            boxShadow: "0 2px 12px hsl(350 60% 15% / 0.5)",
           }}
-          animate={hovered ? { scale: 0.85, opacity: 0.5 } : { scale: 1, opacity: 1 }}
-          transition={{ duration: 0.3 }}
+          animate={hovered ? { scale: 0.8, opacity: 0.4 } : { scale: 1, opacity: 1 }}
+          transition={{ duration: 0.4 }}
         >
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-            <g stroke="hsl(350 30% 80%)" strokeWidth="0.9">
-              <ellipse cx="12" cy="8" rx="2.5" ry="5" transform="rotate(0 12 12)" />
-              <ellipse cx="12" cy="8" rx="2.5" ry="5" transform="rotate(60 12 12)" />
-              <ellipse cx="12" cy="8" rx="2.5" ry="5" transform="rotate(120 12 12)" />
-              <ellipse cx="12" cy="8" rx="2.5" ry="5" transform="rotate(180 12 12)" />
-              <ellipse cx="12" cy="8" rx="2.5" ry="5" transform="rotate(240 12 12)" />
-              <ellipse cx="12" cy="8" rx="2.5" ry="5" transform="rotate(300 12 12)" />
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+            <g stroke="hsl(40 30% 88%)" strokeWidth="0.9" fill="none">
+              <ellipse cx="12" cy="7.5" rx="2.5" ry="5.5" transform="rotate(0 12 12)" />
+              <ellipse cx="12" cy="7.5" rx="2.5" ry="5.5" transform="rotate(60 12 12)" />
+              <ellipse cx="12" cy="7.5" rx="2.5" ry="5.5" transform="rotate(120 12 12)" />
+              <ellipse cx="12" cy="7.5" rx="2.5" ry="5.5" transform="rotate(180 12 12)" />
+              <ellipse cx="12" cy="7.5" rx="2.5" ry="5.5" transform="rotate(240 12 12)" />
+              <ellipse cx="12" cy="7.5" rx="2.5" ry="5.5" transform="rotate(300 12 12)" />
               <circle cx="12" cy="12" r="2" />
             </g>
           </svg>
         </motion.div>
       </div>
 
-      {/* Service title below envelope */}
+      {/* Title below */}
       <div className="mt-4 text-center">
         <p className="font-serif text-foreground text-base">{title}</p>
       </div>
@@ -225,7 +211,7 @@ export function FeaturesSection() {
     <section className="bg-background px-6 py-24">
       <div className="max-w-6xl mx-auto">
         <motion.p
-          className="text-muted-foreground text-sm uppercase tracking-widest mb-12"
+          className="text-muted-foreground text-sm uppercase tracking-widest mb-16"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
