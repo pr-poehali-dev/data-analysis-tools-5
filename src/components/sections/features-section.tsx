@@ -22,52 +22,16 @@ const services = [
 const LILY_URL =
   "https://cdn.poehali.dev/projects/c71e270c-21b3-4982-a23f-edd51568962c/files/8ba55566-3506-4575-b9d8-41b1354d45a8.jpg"
 
-const NOISE = `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E")`
+const NOISE = `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E")`
 
-// Each flap is a triangle covering one side of the envelope
-// clipPath triangles pointing inward from each edge
 const flaps = [
-  {
-    key: "top",
-    clip: "polygon(0 0, 100% 0, 50% 100%)",
-    exit: { y: "-105%" },
-    style: { top: 0, left: 0, right: 0, height: "52%" },
-    bg: "hsl(42 16% 91%)",
-  },
-  {
-    key: "bottom",
-    clip: "polygon(0 100%, 100% 100%, 50% 0%)",
-    exit: { y: "105%" },
-    style: { bottom: 0, left: 0, right: 0, height: "52%" },
-    bg: "hsl(42 20% 94%)",
-  },
-  {
-    key: "left",
-    clip: "polygon(0 0, 0 100%, 100% 50%)",
-    exit: { x: "-105%" },
-    style: { top: 0, bottom: 0, left: 0, width: "52%" },
-    bg: "hsl(42 18% 93%)",
-  },
-  {
-    key: "right",
-    clip: "polygon(100% 0, 100% 100%, 0 50%)",
-    exit: { x: "105%" },
-    style: { top: 0, bottom: 0, right: 0, width: "52%" },
-    bg: "hsl(42 18% 93%)",
-  },
+  { key: "top",    clip: "polygon(0 0, 100% 0, 50% 100%)",    exit: { y: "-110%" }, pos: { top: 0, left: 0, right: 0, height: "52%" },    bg: "hsl(42 14% 90%)" },
+  { key: "bottom", clip: "polygon(0 100%, 100% 100%, 50% 0%)", exit: { y: "110%" },  pos: { bottom: 0, left: 0, right: 0, height: "52%" }, bg: "hsl(42 20% 95%)" },
+  { key: "left",   clip: "polygon(0 0, 0 100%, 100% 50%)",     exit: { x: "-110%" }, pos: { top: 0, bottom: 0, left: 0, width: "52%" },    bg: "hsl(42 17% 92%)" },
+  { key: "right",  clip: "polygon(100% 0, 100% 100%, 0 50%)",  exit: { x: "110%" },  pos: { top: 0, bottom: 0, right: 0, width: "52%" },   bg: "hsl(42 17% 92%)" },
 ]
 
-function EnvelopeCard({
-  title,
-  description,
-  tag,
-  index,
-}: {
-  title: string
-  description: string
-  tag: string
-  index: number
-}) {
+function EnvelopeCard({ title, description, tag, index }: { title: string; description: string; tag: string; index: number }) {
   const [hovered, setHovered] = useState(false)
 
   return (
@@ -80,151 +44,118 @@ function EnvelopeCard({
       viewport={{ once: true }}
       transition={{ duration: 0.9, delay: index * 0.13, ease: [0.16, 1, 0.3, 1] }}
     >
-      {/* Fixed-size envelope container */}
       <div
         className="relative overflow-hidden"
         style={{
           borderRadius: 8,
           height: 220,
-          background: "hsl(42 20% 96%)",
-          boxShadow: "0 4px 6px rgba(0,0,0,0.07), 0 12px 32px rgba(0,0,0,0.14), inset 0 1px 0 rgba(255,255,255,0.8)",
-          border: "1px solid hsl(40 15% 80%)",
+          background: "hsl(42 22% 96%)",
+          boxShadow: [
+            "0 2px 4px rgba(0,0,0,0.06)",
+            "0 8px 24px rgba(0,0,0,0.12)",
+            "0 20px 48px rgba(0,0,0,0.08)",
+            "inset 0 1px 0 rgba(255,255,255,0.9)",
+            "inset 0 -1px 0 rgba(0,0,0,0.04)",
+          ].join(", "),
+          border: "1px solid hsl(40 12% 78%)",
         }}
       >
-        {/* ── ENVELOPE BASE — always visible underneath ── */}
-        {/* Paper texture */}
-        <div className="absolute inset-0 z-0" style={{ backgroundImage: NOISE, backgroundSize: "200px 200px", opacity: 0.045 }} />
+        {/* Paper grain texture */}
+        <div className="absolute inset-0 z-0" style={{ backgroundImage: NOISE, backgroundSize: "180px 180px", opacity: 0.06, mixBlendMode: "multiply" }} />
 
-        {/* Envelope base SVG — fold lines + shadows + edge highlights */}
-        <svg className="absolute inset-0 w-full h-full z-0" viewBox="0 0 300 220" preserveAspectRatio="none">
+        {/* Base fold lines + depth shadows */}
+        <svg className="absolute inset-0 w-full h-full z-0" viewBox="0 0 300 220" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
           <defs>
-            {/* Shadow gradient along each fold */}
-            <linearGradient id="shTop" x1="0.5" y1="0" x2="0.5" y2="1">
-              <stop offset="0%" stopColor="hsl(40 10% 55%)" stopOpacity="0.18" />
-              <stop offset="100%" stopColor="hsl(40 10% 55%)" stopOpacity="0" />
+            <linearGradient id={`gTop-${index}`} x1="0.5" y1="0" x2="0.5" y2="1">
+              <stop offset="0%" stopColor="#6b5c3e" stopOpacity="0.12" />
+              <stop offset="100%" stopColor="#6b5c3e" stopOpacity="0" />
             </linearGradient>
-            <linearGradient id="shBot" x1="0.5" y1="1" x2="0.5" y2="0">
-              <stop offset="0%" stopColor="hsl(40 10% 55%)" stopOpacity="0.18" />
-              <stop offset="100%" stopColor="hsl(40 10% 55%)" stopOpacity="0" />
+            <linearGradient id={`gBot-${index}`} x1="0.5" y1="1" x2="0.5" y2="0">
+              <stop offset="0%" stopColor="#6b5c3e" stopOpacity="0.1" />
+              <stop offset="100%" stopColor="#6b5c3e" stopOpacity="0" />
             </linearGradient>
-            <linearGradient id="shLeft" x1="0" y1="0.5" x2="1" y2="0.5">
-              <stop offset="0%" stopColor="hsl(40 10% 55%)" stopOpacity="0.14" />
-              <stop offset="100%" stopColor="hsl(40 10% 55%)" stopOpacity="0" />
+            <linearGradient id={`gLeft-${index}`} x1="0" y1="0.5" x2="1" y2="0.5">
+              <stop offset="0%" stopColor="#6b5c3e" stopOpacity="0.1" />
+              <stop offset="100%" stopColor="#6b5c3e" stopOpacity="0" />
             </linearGradient>
-            <linearGradient id="shRight" x1="1" y1="0.5" x2="0" y2="0.5">
-              <stop offset="0%" stopColor="hsl(40 10% 55%)" stopOpacity="0.14" />
-              <stop offset="100%" stopColor="hsl(40 10% 55%)" stopOpacity="0" />
+            <linearGradient id={`gRight-${index}`} x1="1" y1="0.5" x2="0" y2="0.5">
+              <stop offset="0%" stopColor="#6b5c3e" stopOpacity="0.1" />
+              <stop offset="100%" stopColor="#6b5c3e" stopOpacity="0" />
             </linearGradient>
           </defs>
-
-          {/* Shadow triangles for depth */}
-          <polygon points="0,0 150,110 0,220" fill="url(#shLeft)" />
-          <polygon points="300,0 150,110 300,220" fill="url(#shRight)" />
-          <polygon points="0,0 300,0 150,110" fill="url(#shTop)" />
-          <polygon points="0,220 300,220 150,110" fill="url(#shBot)" />
-
-          {/* Fold crease lines */}
-          <line x1="0" y1="220" x2="150" y2="110" stroke="hsl(40 10% 62%)" strokeWidth="1" />
-          <line x1="300" y1="220" x2="150" y2="110" stroke="hsl(40 10% 62%)" strokeWidth="1" />
-          <line x1="0" y1="0" x2="150" y2="110" stroke="hsl(40 10% 68%)" strokeWidth="1" />
-          <line x1="300" y1="0" x2="150" y2="110" stroke="hsl(40 10% 68%)" strokeWidth="1" />
-
-          {/* Highlight lines (light edge of crease) */}
-          <line x1="0" y1="220" x2="150" y2="110" stroke="white" strokeWidth="0.5" strokeOpacity="0.6" strokeDasharray="0" />
-          <line x1="300" y1="220" x2="150" y2="110" stroke="white" strokeWidth="0.5" strokeOpacity="0.6" />
-          <line x1="0" y1="0" x2="150" y2="110" stroke="white" strokeWidth="0.5" strokeOpacity="0.4" />
-          <line x1="300" y1="0" x2="150" y2="110" stroke="white" strokeWidth="0.5" strokeOpacity="0.4" />
-
-          {/* Corner rounded highlights */}
-          <path d="M0 0 Q8 0 8 8" stroke="hsl(40 15% 78%)" strokeWidth="1" fill="none" />
-          <path d="M300 0 Q292 0 292 8" stroke="hsl(40 15% 78%)" strokeWidth="1" fill="none" />
-          <path d="M0 220 Q8 220 8 212" stroke="hsl(40 15% 78%)" strokeWidth="1" fill="none" />
-          <path d="M300 220 Q292 220 292 212" stroke="hsl(40 15% 78%)" strokeWidth="1" fill="none" />
+          <polygon points="0,0 300,0 150,110"   fill={`url(#gTop-${index})`} />
+          <polygon points="0,220 300,220 150,110" fill={`url(#gBot-${index})`} />
+          <polygon points="0,0 0,220 150,110"   fill={`url(#gLeft-${index})`} />
+          <polygon points="300,0 300,220 150,110" fill={`url(#gRight-${index})`} />
         </svg>
 
-        {/* ── FOUR FLAPS — fly away on hover ── */}
+        {/* Four flaps */}
         {flaps.map((flap) => (
           <motion.div
             key={flap.key}
             className="absolute z-20 overflow-hidden"
-            style={{
-              ...flap.style,
-              clipPath: flap.clip,
-              background: flap.bg,
-            }}
+            style={{ ...flap.pos, clipPath: flap.clip, background: flap.bg }}
             animate={hovered ? { ...flap.exit, opacity: 0 } : { x: 0, y: 0, opacity: 1 }}
-            transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 0.48, ease: [0.16, 1, 0.3, 1] }}
           >
-            {/* noise on each flap */}
-            <div className="absolute inset-0" style={{ backgroundImage: NOISE, backgroundSize: "150px", opacity: 0.05 }} />
-            {/* lily on top flap */}
+            {/* Grain on flap */}
+            <div className="absolute inset-0" style={{ backgroundImage: NOISE, backgroundSize: "150px", opacity: 0.07, mixBlendMode: "multiply" }} />
+
+            {/* Crease shadow inside each flap (edge toward center) */}
+            <svg className="absolute inset-0 w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
+              {flap.key === "top"    && <polygon points="0,0 100,0 50,100" fill="rgba(0,0,0,0.04)" />}
+              {flap.key === "bottom" && <polygon points="0,100 100,100 50,0" fill="rgba(0,0,0,0.04)" />}
+              {flap.key === "left"   && <polygon points="0,0 0,100 100,50" fill="rgba(0,0,0,0.04)" />}
+              {flap.key === "right"  && <polygon points="100,0 100,100 0,50" fill="rgba(0,0,0,0.04)" />}
+            </svg>
+
+            {/* Lily on top flap */}
             {flap.key === "top" && (
-              <div className="absolute inset-0 flex items-center justify-center" style={{ paddingBottom: 20, paddingTop: 4 }}>
-                <img src={LILY_URL} alt="" style={{ width: 52, height: 52, opacity: 0.22, mixBlendMode: "multiply", objectFit: "contain" }} />
-              </div>
-            )}
-            {/* DEUX MILLE NEUF on top flap */}
-            {flap.key === "top" && (
-              <div className="absolute top-2 left-1/2 -translate-x-1/2 flex gap-2">
-                {["DEUX", "MILLE", "NEUF"].map((w) => (
-                  <span key={w} style={{ fontSize: 6, letterSpacing: "0.18em", textTransform: "uppercase", color: "hsl(0 0% 35%)", fontFamily: "serif", opacity: 0.55 }}>
-                    {w}
-                  </span>
-                ))}
+              <div className="absolute inset-0 flex items-center justify-center" style={{ paddingBottom: 20, paddingTop: 6 }}>
+                <img src={LILY_URL} alt="" style={{ width: 48, height: 48, opacity: 0.2, mixBlendMode: "multiply", objectFit: "contain" }} />
               </div>
             )}
           </motion.div>
         ))}
 
-        {/* ── WAX SEAL — strictly centered above all flaps ── */}
-        <motion.div
-          className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-40 w-10 h-10 rounded-full flex items-center justify-center"
-          style={{
-            background: "radial-gradient(circle at 35% 35%, hsl(350 55% 38%), hsl(350 70% 22%))",
-            boxShadow: "0 2px 10px hsl(350 60% 15% / 0.6), inset 0 1px 0 hsl(350 40% 50% / 0.3)",
-            border: "1.5px solid hsl(350 45% 32%)",
-          }}
-          animate={hovered ? { scale: 0, opacity: 0 } : { scale: 1, opacity: 1 }}
-          transition={{ duration: 0.25 }}
-        >
-          <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
-            <g stroke="hsl(40 40% 88%)" strokeWidth="0.9" fill="none">
-              <ellipse cx="11" cy="11" rx="2" ry="5" transform="rotate(0 11 11)" />
-              <ellipse cx="11" cy="11" rx="2" ry="5" transform="rotate(45 11 11)" />
-              <ellipse cx="11" cy="11" rx="2" ry="5" transform="rotate(90 11 11)" />
-              <ellipse cx="11" cy="11" rx="2" ry="5" transform="rotate(135 11 11)" />
-              <circle cx="11" cy="11" r="1.8" fill="hsl(350 40% 50%)" stroke="hsl(40 40% 88%)" strokeWidth="0.7" />
-            </g>
-          </svg>
-        </motion.div>
+        {/* Crease lines over flaps */}
+        <svg className="absolute inset-0 w-full h-full z-25 pointer-events-none" viewBox="0 0 300 220" preserveAspectRatio="none" style={{ zIndex: 25 }}>
+          {/* dark crease */}
+          <line x1="0"   y1="0"   x2="150" y2="110" stroke="rgba(100,80,50,0.18)" strokeWidth="1.2" />
+          <line x1="300" y1="0"   x2="150" y2="110" stroke="rgba(100,80,50,0.18)" strokeWidth="1.2" />
+          <line x1="0"   y1="220" x2="150" y2="110" stroke="rgba(100,80,50,0.15)" strokeWidth="1.2" />
+          <line x1="300" y1="220" x2="150" y2="110" stroke="rgba(100,80,50,0.15)" strokeWidth="1.2" />
+          {/* light highlight parallel offset */}
+          <line x1="1"   y1="0"   x2="151" y2="110" stroke="rgba(255,255,255,0.55)" strokeWidth="0.6" />
+          <line x1="299" y1="0"   x2="149" y2="110" stroke="rgba(255,255,255,0.55)" strokeWidth="0.6" />
+          <line x1="1"   y1="220" x2="151" y2="110" stroke="rgba(255,255,255,0.45)" strokeWidth="0.6" />
+          <line x1="299" y1="220" x2="149" y2="110" stroke="rgba(255,255,255,0.45)" strokeWidth="0.6" />
+        </svg>
 
-        {/* ── PAPER — appears in center when open ── */}
+        {/* Paper — appears on open */}
         <AnimatePresence>
           {hovered && (
             <motion.div
               key="paper"
-              className="absolute z-10"
+              className="absolute z-30"
               style={{
                 inset: "14px 18px",
                 background: "hsl(42 30% 97%)",
                 borderRadius: 3,
-                boxShadow: "0 2px 16px rgba(0,0,0,0.15)",
+                boxShadow: "0 2px 20px rgba(0,0,0,0.18)",
                 border: "1px solid hsl(40 15% 87%)",
                 overflow: "hidden",
               }}
-              initial={{ opacity: 0, scale: 0.88 }}
+              initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.88 }}
-              transition={{ duration: 0.35, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+              exit={{ opacity: 0, scale: 0.9 }}
+              transition={{ duration: 0.3, delay: 0.18, ease: [0.16, 1, 0.3, 1] }}
             >
-              {/* Ruled lines */}
               <div className="absolute inset-0 pointer-events-none" style={{
-                backgroundImage: "repeating-linear-gradient(0deg, transparent, transparent 22px, hsl(210 30% 85%) 22px, hsl(210 30% 85%) 23px)",
+                backgroundImage: "repeating-linear-gradient(0deg, transparent, transparent 22px, hsl(210 30% 86%) 22px, hsl(210 30% 86%) 23px)",
                 opacity: 0.4,
               }} />
-              {/* Left margin */}
-              <div className="absolute top-0 bottom-0 pointer-events-none" style={{ left: 32, width: 1, background: "hsl(350 50% 78%)", opacity: 0.3 }} />
-
+              <div className="absolute top-0 bottom-0 pointer-events-none" style={{ left: 32, width: 1, background: "hsl(350 50% 78%)", opacity: 0.28 }} />
               <div className="relative h-full flex flex-col justify-center px-5 pl-10 py-4">
                 <p style={{ fontSize: 8, letterSpacing: "0.3em", textTransform: "uppercase", color: "hsl(350 40% 38%)", fontFamily: "serif", marginBottom: 8 }}>
                   {tag}
@@ -241,7 +172,6 @@ function EnvelopeCard({
         </AnimatePresence>
       </div>
 
-      {/* Label below */}
       <div className="mt-3 text-center">
         <p className="font-serif text-foreground text-sm tracking-wide">{title}</p>
       </div>
