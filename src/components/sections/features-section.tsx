@@ -172,13 +172,13 @@ function EnvelopeCard({ title, description, tag, index }: { title: string; descr
             >
 
               <div className="relative h-full flex flex-col justify-center px-5 py-4">
-                <p style={{ fontSize: 8, letterSpacing: "0.3em", textTransform: "uppercase", color: "hsl(30 40% 35%)", fontFamily: "sans-serif", marginBottom: 8 }}>
+                <p style={{ fontSize: 8, letterSpacing: "0.3em", textTransform: "uppercase", color: "hsl(30 40% 35%)", fontFamily: "Inter, system-ui, sans-serif", marginBottom: 8 }}>
                   {tag}
                 </p>
-                <h3 style={{ fontFamily: "sans-serif", fontSize: 16, lineHeight: 1.3, color: "hsl(25 30% 15%)", marginBottom: 8 }}>
+                <h3 style={{ fontFamily: "Inter, system-ui, sans-serif", fontSize: 16, lineHeight: 1.3, color: "hsl(25 30% 15%)", marginBottom: 8 }}>
                   {title}
                 </h3>
-                <p style={{ fontFamily: "sans-serif", fontSize: 12, lineHeight: 1.7, color: "hsl(25 20% 30%)" }}>
+                <p style={{ fontFamily: "Inter, system-ui, sans-serif", fontSize: 12, lineHeight: 1.7, color: "hsl(25 20% 30%)" }}>
                   {description}
                 </p>
               </div>
