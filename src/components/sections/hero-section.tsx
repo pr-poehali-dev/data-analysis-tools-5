@@ -17,14 +17,14 @@ export function HeroSection() {
           className="absolute w-[300px] md:w-[360px] aspect-[3/4] rounded-2xl"
           style={{ background: "radial-gradient(ellipse, rgba(255,255,255,0.07) 0%, transparent 70%)" }}
           animate={{ opacity: [0, 1, 1, 0], scale: [0.8, 1.15, 1.15, 0.8] }}
-          transition={{ duration: 5, delay: 0, ease: "easeInOut", repeat: Infinity, repeatDelay: 6 }}
+          transition={{ duration: 14, delay: 0, ease: "easeInOut", repeat: Infinity, repeatDelay: 2 }}
         />
 
         {/* Frame border reveal */}
         <motion.div
           className="absolute w-[280px] md:w-[320px] aspect-[3/4] rounded-xl border border-foreground/10"
           animate={{ opacity: [0, 1, 1, 0], scale: [1.08, 1, 1, 1.08] }}
-          transition={{ duration: 5, ease: [0.16, 1, 0.3, 1], repeat: Infinity, repeatDelay: 6 }}
+          transition={{ duration: 14, ease: [0.16, 1, 0.3, 1], repeat: Infinity, repeatDelay: 2 }}
         />
 
         {/* Main image */}
@@ -40,14 +40,14 @@ export function HeroSection() {
             opacity: [0, 1, 1, 0],
             scale: [0.92, 1, 1, 0.92],
           }}
-          transition={{ duration: 5, ease: [0.16, 1, 0.3, 1], repeat: Infinity, repeatDelay: 6, times: [0, 0.28, 0.8, 1] }}
+          transition={{ duration: 14, ease: [0.16, 1, 0.3, 1], repeat: Infinity, repeatDelay: 2, times: [0, 0.12, 0.88, 1] }}
         >
           <motion.img
             src={heroImage}
             alt="Портфолио"
             className="w-full h-full object-cover"
             animate={{ scale: [1.18, 1, 1, 1.18] }}
-            transition={{ duration: 5, ease: [0.16, 1, 0.3, 1], repeat: Infinity, repeatDelay: 6, times: [0, 0.36, 0.8, 1] }}
+            transition={{ duration: 14, ease: [0.16, 1, 0.3, 1], repeat: Infinity, repeatDelay: 2, times: [0, 0.15, 0.88, 1] }}
           />
         </motion.div>
 
@@ -62,7 +62,7 @@ export function HeroSection() {
             key={i}
             className={`absolute w-5 h-5 border-foreground/30 ${cls}`}
             animate={{ opacity: [0, 1, 1, 0], scale: [0.5, 1, 1, 0.5] }}
-            transition={{ duration: 5, delay: i * 0.08, ease: [0.16, 1, 0.3, 1], repeat: Infinity, repeatDelay: 6, times: [0, 0.24, 0.8, 1] }}
+            transition={{ duration: 14, delay: i * 0.08, ease: [0.16, 1, 0.3, 1], repeat: Infinity, repeatDelay: 2, times: [0, 0.12, 0.88, 1] }}
           />
         ))}
       </div>
