@@ -30,31 +30,17 @@ export function HeroSection() {
     >
       {/* Stacked images */}
       <div className="relative flex items-center justify-center">
-        {/* Image 1 — lily bloom animation */}
         <motion.div
           className="absolute w-[280px] md:w-[320px] aspect-[3/4] rounded-xl overflow-hidden shadow-2xl"
           style={{ rotate: rotate1, x: x1, y, zIndex: 1 }}
-          initial={{
-            clipPath:
-              "polygon(50% 50%, 50% 50%, 50% 50%, 50% 50%, 50% 50%, 50% 50%, 50% 50%, 50% 50%)",
-            scale: 0.7,
-            opacity: 0,
-          }}
-          animate={{
-            clipPath:
-              "polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%, 20% 0%, 80% 0%)",
-            scale: 1,
-            opacity: 1,
-          }}
-          transition={{ duration: 1.4, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+          initial={{ clipPath: "inset(100% 0 0 0)" }}
+          animate={{ clipPath: "inset(0 0 0 0)" }}
+          transition={{ duration: 1, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
         >
-          <motion.img
+          <img
             src={images[0] || "/placeholder.svg"}
             alt="Портфолио 1"
             className="w-full h-full object-cover"
-            initial={{ scale: 1.3, rotate: -12 }}
-            animate={{ scale: 1, rotate: 0 }}
-            transition={{ duration: 1.6, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
           />
         </motion.div>
 
