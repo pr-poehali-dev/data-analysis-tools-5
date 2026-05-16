@@ -263,15 +263,13 @@ function EnvelopeCard({
           animate={hovered ? { scale: 0.5, opacity: 0, y: -8 } : { scale: 1, opacity: 1, y: 0 }}
           transition={{ duration: 0.3 }}
         >
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-            <g stroke="hsl(40 40% 88%)" strokeWidth="0.85" fill="none">
-              <ellipse cx="12" cy="7" rx="2.5" ry="5.5" transform="rotate(0 12 12)" />
-              <ellipse cx="12" cy="7" rx="2.5" ry="5.5" transform="rotate(60 12 12)" />
-              <ellipse cx="12" cy="7" rx="2.5" ry="5.5" transform="rotate(120 12 12)" />
-              <ellipse cx="12" cy="7" rx="2.5" ry="5.5" transform="rotate(180 12 12)" />
-              <ellipse cx="12" cy="7" rx="2.5" ry="5.5" transform="rotate(240 12 12)" />
-              <ellipse cx="12" cy="7" rx="2.5" ry="5.5" transform="rotate(300 12 12)" />
-              <circle cx="12" cy="12" r="2" />
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+            <g stroke="hsl(40 40% 88%)" strokeWidth="0.9" fill="none">
+              <ellipse cx="11" cy="11" rx="2" ry="5" transform="rotate(0 11 11)" />
+              <ellipse cx="11" cy="11" rx="2" ry="5" transform="rotate(45 11 11)" />
+              <ellipse cx="11" cy="11" rx="2" ry="5" transform="rotate(90 11 11)" />
+              <ellipse cx="11" cy="11" rx="2" ry="5" transform="rotate(135 11 11)" />
+              <circle cx="11" cy="11" r="1.8" fill="hsl(350 40% 50%)" stroke="hsl(40 40% 88%)" strokeWidth="0.7" />
             </g>
           </svg>
         </motion.div>
