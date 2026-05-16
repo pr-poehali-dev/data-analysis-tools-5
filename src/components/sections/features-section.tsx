@@ -210,6 +210,10 @@ export function FeaturesSection() {
           Услуги
         </motion.p>
 
+        <p className="text-muted-foreground text-xs mb-8 opacity-60">
+          Наведи на конверт, чтобы узнать подробнее
+        </p>
+
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
           {services.map((s, i) => (
             <EnvelopeCard key={i} {...s} index={i} />
