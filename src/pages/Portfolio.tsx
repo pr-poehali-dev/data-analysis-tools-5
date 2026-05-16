@@ -122,9 +122,9 @@ const photos = [
     title: "Огонь",
   },
   {
-    src: "https://cdn.poehali.dev/projects/c71e270c-21b3-4982-a23f-edd51568962c/bucket/10c58a11-ff2c-4f16-badc-6d3e729fd86b.jpg",
+    src: "https://cdn.poehali.dev/projects/c71e270c-21b3-4982-a23f-edd51568962c/bucket/c56782aa-a1c0-4866-b475-2edaf33bfa0c.jpg",
     category: "Мода",
-    title: "Маска",
+    title: "Фиолет",
   },
 ]
 
