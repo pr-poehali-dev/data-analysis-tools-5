@@ -75,7 +75,7 @@ export function PricingSection() {
 
               <motion.button
                 onClick={() => navigate("/contacts")}
-                whileHover={{ scale: 1.03, backgroundColor: "#6B2737" }}
+                whileHover={{ scale: 1.03, backgroundColor: "#4A0E1A" }}
                 whileTap={{ scale: 0.97 }}
                 transition={{ duration: 0.2 }}
                 className={`w-full mt-8 py-3 px-6 rounded-lg font-medium transition-colors ${
