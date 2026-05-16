@@ -5,33 +5,43 @@ import { ArrowRight } from "lucide-react"
 
 const articles = [
   {
-    title: "Как я снимаю портреты при естественном свете",
-    category: "Техника",
+    title: "За какое время до съемки нужно бронировать дату и время?",
+    category: "Советы",
     image: "/fashion-model-editorial-portrait-dramatic-lighting.jpg",
+    answer:
+      "Лучше думать об этом заранее — желательно записываться минимум за 2–4 недели. Популярные даты и выходные расходятся быстро, особенно в сезон. Если хочешь конкретный день и время — не откладывай: чем раньше напишешь, тем больше выбор и тем спокойнее будет подготовка.",
   },
   {
     title: "Золотой час: магия утреннего освещения",
     category: "Свет",
     image: "/fashion-photography-editorial-black-and-white.jpg",
+    answer: null,
   },
   {
     title: "Минимализм в кадре: меньше — значит больше",
     category: "Композиция",
     image: "/interior-design-minimalist-living-room-natural-lig.jpg",
+    answer: null,
   },
   {
     title: "Как подготовиться к фотосессии: советы клиентам",
     category: "Советы",
     image: "/modern-architecture-building-exterior-minimal.jpg",
+    answer: null,
   },
 ]
 
 export function InsightsSection() {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
+  const [openIndex, setOpenIndex] = useState<number | null>(null)
 
   const handleMouseMove = (e: React.MouseEvent) => {
     setMousePosition({ x: e.clientX, y: e.clientY })
+  }
+
+  const toggleAnswer = (i: number) => {
+    setOpenIndex((prev) => (prev === i ? null : i))
   }
 
   return (
@@ -48,33 +58,68 @@ export function InsightsSection() {
 
         <div className="divide-y divide-border">
           {articles.map((article, i) => (
-            <motion.a
+            <motion.div
               key={i}
-              href="#"
-              className="group flex items-center justify-between py-6 relative"
+              className="group relative"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
               onMouseEnter={() => setHoveredIndex(i)}
               onMouseLeave={() => setHoveredIndex(null)}
-              whileHover={{ paddingLeft: 16, paddingRight: 16 }}
-              data-clickable
             >
-              <div className="flex-1">
-                <span className="text-xs text-muted-foreground uppercase tracking-wider">{article.category}</span>
-                <h3 className="font-serif text-xl md:text-2xl text-foreground mt-1 group-hover:text-primary transition-colors">
-                  {article.title}
-                </h3>
+              <div
+                className="flex items-center justify-between py-6 cursor-pointer"
+                onClick={() => article.answer && toggleAnswer(i)}
+                data-clickable
+              >
+                <div className="flex-1">
+                  <span className="text-xs text-muted-foreground uppercase tracking-wider">{article.category}</span>
+                  <h3 className="font-serif text-xl md:text-2xl text-foreground mt-1 group-hover:text-primary transition-colors">
+                    {article.title}
+                  </h3>
+                </div>
+                <button
+                  className="ml-4 flex-shrink-0"
+                  onClick={(e) => {
+                    e.stopPropagation()
+                    if (article.answer) toggleAnswer(i)
+                  }}
+                  data-clickable
+                >
+                  <motion.div
+                    animate={article.answer && openIndex === i ? { rotate: 90 } : { rotate: 0 }}
+                    transition={{ duration: 0.25 }}
+                  >
+                    <ArrowRight className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors" />
+                  </motion.div>
+                </button>
               </div>
-              <ArrowRight className="w-5 h-5 text-muted-foreground group-hover:text-primary group-hover:translate-x-1 transition-all" />
-            </motion.a>
+
+              {article.answer && (
+                <AnimatePresence>
+                  {openIndex === i && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                      className="overflow-hidden"
+                    >
+                      <p className="pb-6 text-muted-foreground leading-relaxed text-sm md:text-base max-w-2xl">
+                        {article.answer}
+                      </p>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              )}
+            </motion.div>
           ))}
         </div>
 
         {/* Floating hover image */}
         <AnimatePresence>
-          {hoveredIndex !== null && (
+          {hoveredIndex !== null && openIndex !== hoveredIndex && (
             <motion.div
               className="fixed pointer-events-none z-50 w-[200px] md:w-[300px] rounded-lg overflow-hidden shadow-2xl hidden md:block"
               initial={{ opacity: 0, scale: 0.8 }}
