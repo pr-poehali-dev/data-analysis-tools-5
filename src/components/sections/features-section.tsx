@@ -199,7 +199,7 @@ export function FeaturesSection() {
               <BusyIndicator />
             </div>
             <div className="mt-4">
-              <h3 className="font-serif text-xl text-foreground">Сроки обработки</h3>
+              <h3 className="font-serif text-xl text-foreground">Обработка</h3>
               <p className="text-muted-foreground text-sm mt-1">Готовность фотографий зависит от загруженности в конкретный период.</p>
             </div>
           </motion.div>
