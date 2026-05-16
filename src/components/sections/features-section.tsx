@@ -161,7 +161,7 @@ function EnvelopeCard({ title, description, tag, index }: { title: string; descr
                 inset: "14px 18px",
                 background: "hsl(38 45% 88%)",
                 borderRadius: 3,
-                boxShadow: "0 2px 20px rgba(0,0,0,0.22), inset 0 0 30px rgba(120,90,40,0.08)",
+                boxShadow: "0 2px 12px rgba(0,0,0,0.12)",
                 border: "1px solid hsl(36 30% 72%)",
                 overflow: "hidden",
               }}
@@ -170,16 +170,7 @@ function EnvelopeCard({ title, description, tag, index }: { title: string; descr
               exit={{ opacity: 0, scale: 0.9 }}
               transition={{ duration: 0.3, delay: 0.18, ease: [0.16, 1, 0.3, 1] }}
             >
-              {/* Пергаментная текстура — зернистость */}
-              <div className="absolute inset-0 pointer-events-none" style={{ backgroundImage: NOISE, backgroundSize: "120px 120px", opacity: 0.18, mixBlendMode: "multiply" }} />
-              {/* Тёмные края как у настоящего пергамента */}
-              <div className="absolute inset-0 pointer-events-none" style={{
-                background: "radial-gradient(ellipse at center, transparent 55%, rgba(90,60,20,0.18) 100%)",
-              }} />
-              {/* Лёгкие горизонтальные волокна */}
-              <div className="absolute inset-0 pointer-events-none" style={{
-                backgroundImage: "repeating-linear-gradient(0deg, transparent, transparent 18px, rgba(90,60,20,0.04) 18px, rgba(90,60,20,0.04) 19px)",
-              }} />
+
               <div className="relative h-full flex flex-col justify-center px-5 py-4">
                 <p style={{ fontSize: 8, letterSpacing: "0.3em", textTransform: "uppercase", color: "hsl(30 40% 35%)", fontFamily: "serif", marginBottom: 8 }}>
                   {tag}
