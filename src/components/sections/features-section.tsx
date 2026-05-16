@@ -126,11 +126,12 @@ function EnvelopeCard({ title, description, tag, index }: { title: string; descr
           <span
             className="font-serif italic leading-tight select-none text-center px-4"
             style={{
-              fontSize: 22,
-              color: "hsl(0 0% 8%)",
-              opacity: 0.55,
+              fontSize: 24,
+              color: "hsl(0 0% 5%)",
+              opacity: 0.85,
               letterSpacing: "0.01em",
               lineHeight: 1.3,
+              fontWeight: 700,
             }}
           >
             {title}
