@@ -16,33 +16,38 @@ export function HeroSection() {
         <motion.div
           className="absolute w-[300px] md:w-[360px] aspect-[3/4] rounded-2xl"
           style={{ background: "radial-gradient(ellipse, rgba(255,255,255,0.07) 0%, transparent 70%)" }}
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1.15 }}
-          transition={{ duration: 2, delay: 0.1, ease: "easeOut" }}
+          animate={{ opacity: [0, 1, 1, 0], scale: [0.8, 1.15, 1.15, 0.8] }}
+          transition={{ duration: 5, delay: 0, ease: "easeInOut", repeat: Infinity, repeatDelay: 0.5 }}
         />
 
         {/* Frame border reveal */}
         <motion.div
           className="absolute w-[280px] md:w-[320px] aspect-[3/4] rounded-xl border border-foreground/10"
-          initial={{ opacity: 0, scale: 1.08 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1.6, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+          animate={{ opacity: [0, 1, 1, 0], scale: [1.08, 1, 1, 1.08] }}
+          transition={{ duration: 5, ease: [0.16, 1, 0.3, 1], repeat: Infinity, repeatDelay: 0.5 }}
         />
 
         {/* Main image */}
         <motion.div
           className="relative w-[280px] md:w-[320px] aspect-[3/4] rounded-xl overflow-hidden shadow-2xl"
-          initial={{ clipPath: "inset(50% 50% 50% 50% round 12px)", opacity: 0, scale: 0.92 }}
-          animate={{ clipPath: "inset(0% 0% 0% 0% round 12px)", opacity: 1, scale: 1 }}
-          transition={{ duration: 1.4, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+          animate={{
+            clipPath: [
+              "inset(50% 50% 50% 50% round 12px)",
+              "inset(0% 0% 0% 0% round 12px)",
+              "inset(0% 0% 0% 0% round 12px)",
+              "inset(50% 50% 50% 50% round 12px)",
+            ],
+            opacity: [0, 1, 1, 0],
+            scale: [0.92, 1, 1, 0.92],
+          }}
+          transition={{ duration: 5, ease: [0.16, 1, 0.3, 1], repeat: Infinity, repeatDelay: 0.5, times: [0, 0.28, 0.8, 1] }}
         >
           <motion.img
             src={heroImage}
             alt="Портфолио"
             className="w-full h-full object-cover"
-            initial={{ scale: 1.18 }}
-            animate={{ scale: 1 }}
-            transition={{ duration: 1.8, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+            animate={{ scale: [1.18, 1, 1, 1.18] }}
+            transition={{ duration: 5, ease: [0.16, 1, 0.3, 1], repeat: Infinity, repeatDelay: 0.5, times: [0, 0.36, 0.8, 1] }}
           />
         </motion.div>
 
@@ -56,9 +61,8 @@ export function HeroSection() {
           <motion.div
             key={i}
             className={`absolute w-5 h-5 border-foreground/30 ${cls}`}
-            initial={{ opacity: 0, scale: 0.5 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.6, delay: 1.2 + i * 0.08, ease: [0.16, 1, 0.3, 1] }}
+            animate={{ opacity: [0, 1, 1, 0], scale: [0.5, 1, 1, 0.5] }}
+            transition={{ duration: 5, delay: i * 0.08, ease: [0.16, 1, 0.3, 1], repeat: Infinity, repeatDelay: 0.5, times: [0, 0.24, 0.8, 1] }}
           />
         ))}
       </div>
