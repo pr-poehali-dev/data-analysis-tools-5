@@ -131,7 +131,7 @@ function EnvelopeCard({ title, description, tag, index }: { title: string; descr
               opacity: 0.85,
               letterSpacing: "0.01em",
               lineHeight: 1.3,
-              fontWeight: 700,
+              fontWeight: 400,
             }}
           >
             {title}
