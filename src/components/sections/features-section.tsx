@@ -37,8 +37,7 @@ function EnvelopeCard({ title, description, tag, index }: { title: string; descr
   return (
     <motion.div
       className="relative cursor-pointer select-none"
-      onHoverStart={() => setHovered(true)}
-      onHoverEnd={() => setHovered(false)}
+      onClick={() => setHovered((v) => !v)}
       initial={{ opacity: 0, y: 50 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
@@ -211,7 +210,7 @@ export function FeaturesSection() {
         </motion.p>
 
         <p className="text-muted-foreground text-xs mb-8 opacity-60">
-          Наведи на конверт, чтобы узнать подробнее
+          Нажми на конверт, чтобы узнать подробнее
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
