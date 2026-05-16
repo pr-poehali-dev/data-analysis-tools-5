@@ -4,23 +4,7 @@ import { CustomCursor } from "@/components/custom-cursor"
 import { NavBar } from "@/components/nav-bar"
 import { FooterSection } from "@/components/sections/footer-section"
 
-const values = [
-  {
-    number: "01",
-    title: "Свет",
-    text: "Каждая съёмка начинается с поиска правильного света — естественного или студийного. Свет — это душа кадра.",
-  },
-  {
-    number: "02",
-    title: "Момент",
-    text: "Я не снимаю позы. Я ловлю настоящие эмоции, мимолётные взгляды и живые истории.",
-  },
-  {
-    number: "03",
-    title: "Детали",
-    text: "От выбора локации до финальной обработки — каждая деталь важна. Именно детали делают фото незабываемым.",
-  },
-]
+
 
 export default function About() {
   return (
@@ -77,23 +61,7 @@ export default function About() {
               </motion.div>
             </div>
 
-            {/* Values */}
-            <div className="divide-y divide-border">
-              {values.map((v, i) => (
-                <motion.div
-                  key={i}
-                  className="py-10 grid grid-cols-1 md:grid-cols-[80px_1fr_2fr] gap-4 md:gap-8 items-start"
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.7, delay: i * 0.1 }}
-                >
-                  <span className="text-muted-foreground/40 font-serif text-lg">{v.number}</span>
-                  <h3 className="font-serif text-2xl text-foreground">{v.title}</h3>
-                  <p className="text-muted-foreground leading-relaxed">{v.text}</p>
-                </motion.div>
-              ))}
-            </div>
+
           </div>
         </section>
 
