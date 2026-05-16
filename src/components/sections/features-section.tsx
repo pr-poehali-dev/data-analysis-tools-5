@@ -118,19 +118,19 @@ function EnvelopeCard({ title, description, tag, index }: { title: string; descr
           </motion.div>
         ))}
 
-        {/* Calligraphic title — sits on top of all flaps */}
+        {/* Calligraphic title — centered, fully readable */}
         <div
-          className="absolute inset-0 pointer-events-none flex items-center overflow-hidden"
-          style={{ padding: "0 14px", zIndex: 28 }}
+          className="absolute inset-0 pointer-events-none flex items-center justify-center overflow-hidden"
+          style={{ zIndex: 28 }}
         >
           <span
-            className="font-serif italic leading-none select-none"
+            className="font-serif italic leading-tight select-none text-center px-4"
             style={{
-              fontSize: 38,
+              fontSize: 22,
               color: "hsl(0 0% 8%)",
-              opacity: 0.18,
-              whiteSpace: "nowrap",
-              letterSpacing: "-0.01em",
+              opacity: 0.55,
+              letterSpacing: "0.01em",
+              lineHeight: 1.3,
             }}
           >
             {title}
