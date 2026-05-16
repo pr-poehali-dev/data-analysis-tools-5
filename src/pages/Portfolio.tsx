@@ -154,16 +154,11 @@ function PhotoCard({ photo, index }: { photo: typeof photos[0]; index: number })
         />
       </div>
       <motion.div
-        className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent flex items-end p-6"
+        className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"
         initial={{ opacity: 0 }}
         whileHover={{ opacity: 1 }}
         transition={{ duration: 0.3 }}
-      >
-        <div>
-          <p className="text-white/60 text-xs uppercase tracking-widest">{photo.category}</p>
-          <h3 className="text-white font-serif text-2xl mt-1">{photo.title}</h3>
-        </div>
-      </motion.div>
+      />
     </motion.div>
   )
 }
