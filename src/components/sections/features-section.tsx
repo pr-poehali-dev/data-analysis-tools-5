@@ -27,33 +27,33 @@ const NOISE = `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'
 // Each flap is a triangle covering one side of the envelope
 // clipPath triangles pointing inward from each edge
 const flaps = [
-  // top flap — triangle pointing down
   {
     key: "top",
     clip: "polygon(0 0, 100% 0, 50% 100%)",
     exit: { y: "-105%" },
     style: { top: 0, left: 0, right: 0, height: "52%" },
+    bg: "hsl(42 16% 91%)",
   },
-  // bottom flap — triangle pointing up
   {
     key: "bottom",
     clip: "polygon(0 100%, 100% 100%, 50% 0%)",
     exit: { y: "105%" },
     style: { bottom: 0, left: 0, right: 0, height: "52%" },
+    bg: "hsl(42 20% 94%)",
   },
-  // left flap — triangle pointing right
   {
     key: "left",
     clip: "polygon(0 0, 0 100%, 100% 50%)",
     exit: { x: "-105%" },
     style: { top: 0, bottom: 0, left: 0, width: "52%" },
+    bg: "hsl(42 18% 93%)",
   },
-  // right flap — triangle pointing left
   {
     key: "right",
     clip: "polygon(100% 0, 100% 100%, 0 50%)",
     exit: { x: "105%" },
     style: { top: 0, bottom: 0, right: 0, width: "52%" },
+    bg: "hsl(42 18% 93%)",
   },
 ]
 
@@ -95,12 +95,51 @@ function EnvelopeCard({
         {/* Paper texture */}
         <div className="absolute inset-0 z-0" style={{ backgroundImage: NOISE, backgroundSize: "200px 200px", opacity: 0.045 }} />
 
-        {/* Fold lines */}
+        {/* Envelope base SVG — fold lines + shadows + edge highlights */}
         <svg className="absolute inset-0 w-full h-full z-0" viewBox="0 0 300 220" preserveAspectRatio="none">
-          <line x1="0" y1="220" x2="150" y2="110" stroke="hsl(40 10% 72%)" strokeWidth="0.9" />
-          <line x1="300" y1="220" x2="150" y2="110" stroke="hsl(40 10% 72%)" strokeWidth="0.9" />
-          <line x1="0" y1="0" x2="150" y2="110" stroke="hsl(40 10% 76%)" strokeWidth="0.9" />
-          <line x1="300" y1="0" x2="150" y2="110" stroke="hsl(40 10% 76%)" strokeWidth="0.9" />
+          <defs>
+            {/* Shadow gradient along each fold */}
+            <linearGradient id="shTop" x1="0.5" y1="0" x2="0.5" y2="1">
+              <stop offset="0%" stopColor="hsl(40 10% 55%)" stopOpacity="0.18" />
+              <stop offset="100%" stopColor="hsl(40 10% 55%)" stopOpacity="0" />
+            </linearGradient>
+            <linearGradient id="shBot" x1="0.5" y1="1" x2="0.5" y2="0">
+              <stop offset="0%" stopColor="hsl(40 10% 55%)" stopOpacity="0.18" />
+              <stop offset="100%" stopColor="hsl(40 10% 55%)" stopOpacity="0" />
+            </linearGradient>
+            <linearGradient id="shLeft" x1="0" y1="0.5" x2="1" y2="0.5">
+              <stop offset="0%" stopColor="hsl(40 10% 55%)" stopOpacity="0.14" />
+              <stop offset="100%" stopColor="hsl(40 10% 55%)" stopOpacity="0" />
+            </linearGradient>
+            <linearGradient id="shRight" x1="1" y1="0.5" x2="0" y2="0.5">
+              <stop offset="0%" stopColor="hsl(40 10% 55%)" stopOpacity="0.14" />
+              <stop offset="100%" stopColor="hsl(40 10% 55%)" stopOpacity="0" />
+            </linearGradient>
+          </defs>
+
+          {/* Shadow triangles for depth */}
+          <polygon points="0,0 150,110 0,220" fill="url(#shLeft)" />
+          <polygon points="300,0 150,110 300,220" fill="url(#shRight)" />
+          <polygon points="0,0 300,0 150,110" fill="url(#shTop)" />
+          <polygon points="0,220 300,220 150,110" fill="url(#shBot)" />
+
+          {/* Fold crease lines */}
+          <line x1="0" y1="220" x2="150" y2="110" stroke="hsl(40 10% 62%)" strokeWidth="1" />
+          <line x1="300" y1="220" x2="150" y2="110" stroke="hsl(40 10% 62%)" strokeWidth="1" />
+          <line x1="0" y1="0" x2="150" y2="110" stroke="hsl(40 10% 68%)" strokeWidth="1" />
+          <line x1="300" y1="0" x2="150" y2="110" stroke="hsl(40 10% 68%)" strokeWidth="1" />
+
+          {/* Highlight lines (light edge of crease) */}
+          <line x1="0" y1="220" x2="150" y2="110" stroke="white" strokeWidth="0.5" strokeOpacity="0.6" strokeDasharray="0" />
+          <line x1="300" y1="220" x2="150" y2="110" stroke="white" strokeWidth="0.5" strokeOpacity="0.6" />
+          <line x1="0" y1="0" x2="150" y2="110" stroke="white" strokeWidth="0.5" strokeOpacity="0.4" />
+          <line x1="300" y1="0" x2="150" y2="110" stroke="white" strokeWidth="0.5" strokeOpacity="0.4" />
+
+          {/* Corner rounded highlights */}
+          <path d="M0 0 Q8 0 8 8" stroke="hsl(40 15% 78%)" strokeWidth="1" fill="none" />
+          <path d="M300 0 Q292 0 292 8" stroke="hsl(40 15% 78%)" strokeWidth="1" fill="none" />
+          <path d="M0 220 Q8 220 8 212" stroke="hsl(40 15% 78%)" strokeWidth="1" fill="none" />
+          <path d="M300 220 Q292 220 292 212" stroke="hsl(40 15% 78%)" strokeWidth="1" fill="none" />
         </svg>
 
         {/* ── FOUR FLAPS — fly away on hover ── */}
@@ -111,7 +150,7 @@ function EnvelopeCard({
             style={{
               ...flap.style,
               clipPath: flap.clip,
-              background: "hsl(42 18% 93%)",
+              background: flap.bg,
             }}
             animate={hovered ? { ...flap.exit, opacity: 0 } : { x: 0, y: 0, opacity: 1 }}
             transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
@@ -137,9 +176,9 @@ function EnvelopeCard({
           </motion.div>
         ))}
 
-        {/* ── WAX SEAL — center, disappears on hover ── */}
+        {/* ── WAX SEAL — strictly centered above all flaps ── */}
         <motion.div
-          className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-30 w-10 h-10 rounded-full flex items-center justify-center"
+          className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-40 w-10 h-10 rounded-full flex items-center justify-center"
           style={{
             background: "radial-gradient(circle at 35% 35%, hsl(350 55% 38%), hsl(350 70% 22%))",
             boxShadow: "0 2px 10px hsl(350 60% 15% / 0.6), inset 0 1px 0 hsl(350 40% 50% / 0.3)",
