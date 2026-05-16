@@ -4,6 +4,7 @@ import { LenisProvider } from "@/components/lenis-provider"
 import { CustomCursor } from "@/components/custom-cursor"
 import { NavBar } from "@/components/nav-bar"
 import { FooterSection } from "@/components/sections/footer-section"
+import { BgAnimation } from "@/components/bg-animation"
 
 const photos = [
   {
@@ -166,7 +167,8 @@ function PhotoCard({ photo, index }: { photo: typeof photos[0]; index: number })
 export default function Portfolio() {
   return (
     <LenisProvider>
-      <main className="custom-cursor bg-background min-h-screen">
+      <main className="custom-cursor min-h-screen">
+        <BgAnimation />
         <CustomCursor />
         <NavBar />
 

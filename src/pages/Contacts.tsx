@@ -4,6 +4,7 @@ import { LenisProvider } from "@/components/lenis-provider"
 import { CustomCursor } from "@/components/custom-cursor"
 import { NavBar } from "@/components/nav-bar"
 import { FooterSection } from "@/components/sections/footer-section"
+import { BgAnimation } from "@/components/bg-animation"
 
 export default function Contacts() {
   const [form, setForm] = useState({ name: "", phone: "", message: "" })
@@ -16,7 +17,8 @@ export default function Contacts() {
 
   return (
     <LenisProvider>
-      <main className="custom-cursor bg-background min-h-screen">
+      <main className="custom-cursor min-h-screen">
+        <BgAnimation />
         <CustomCursor />
         <NavBar />
 
