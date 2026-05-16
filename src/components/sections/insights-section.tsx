@@ -76,7 +76,6 @@ export function InsightsSection() {
                 data-clickable
               >
                 <div className="flex-1">
-                  <span className="text-xs text-muted-foreground uppercase tracking-wider">{article.category}</span>
                   <h3 className="font-serif text-xl md:text-2xl text-foreground mt-1 group-hover:text-primary transition-colors">
                     {article.title}
                   </h3>
