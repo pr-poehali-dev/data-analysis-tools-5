@@ -106,6 +106,16 @@ const photos = [
     category: "Студия",
     title: "Перья",
   },
+  {
+    src: "https://cdn.poehali.dev/projects/c71e270c-21b3-4982-a23f-edd51568962c/bucket/42db3c7d-8dbc-4a93-b8f3-979c9d9d323b.jpg",
+    category: "Портрет",
+    title: "Объятие",
+  },
+  {
+    src: "https://cdn.poehali.dev/projects/c71e270c-21b3-4982-a23f-edd51568962c/bucket/3c748bb9-b7b0-4f1e-a6aa-741e6e710c6e.jpg",
+    category: "Мода",
+    title: "Белый мех",
+  },
 ]
 
 function PhotoCard({ photo, index }: { photo: typeof photos[0]; index: number }) {
