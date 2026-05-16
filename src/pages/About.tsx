@@ -50,7 +50,7 @@ export default function About() {
                 transition={{ duration: 1, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
               >
                 <h2 className="font-serif text-3xl md:text-4xl text-foreground mb-6">
-                  Я снимаю людей такими, какие они есть.
+                  Я люблю видеть прекрасное в людях и мире вокруг.
                 </h2>
                 <p className="text-muted-foreground leading-relaxed mb-4">
                   Фотограф с многолетним опытом в портретной и репортажной съёмке. Работаю в студии и на природе, нахожу красоту в простых моментах.
