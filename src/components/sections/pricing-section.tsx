@@ -73,16 +73,20 @@ export function PricingSection() {
                 ))}
               </ul>
 
-              <button
+              <motion.button
                 onClick={() => navigate("/contacts")}
+                whileHover={{ scale: 1.03, backgroundColor: "#6B2737" }}
+                whileTap={{ scale: 0.97 }}
+                transition={{ duration: 0.2 }}
                 className={`w-full mt-8 py-3 px-6 rounded-lg font-medium transition-colors ${
                   plan.popular
-                    ? "bg-primary text-primary-foreground hover:bg-primary/90"
-                    : "bg-secondary text-foreground hover:bg-accent/30"
+                    ? "bg-primary text-primary-foreground"
+                    : "bg-secondary text-foreground"
                 }`}
+                style={{}}
               >
                 Записаться
-              </button>
+              </motion.button>
             </motion.div>
           ))}
         </div>
