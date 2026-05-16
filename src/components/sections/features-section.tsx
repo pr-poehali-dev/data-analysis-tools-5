@@ -27,6 +27,9 @@ const LILY_URL =
 
 const NOISE = `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E")`
 
+// Paper height in px — used to offset correctly
+const PAPER_H = 140
+
 function EnvelopeCard({
   title,
   description,
@@ -51,127 +54,109 @@ function EnvelopeCard({
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.9, delay: index * 0.13, ease: [0.16, 1, 0.3, 1] }}
+      // Extra top padding so paper has room to slide up without pushing layout
+      style={{ paddingTop: PAPER_H }}
     >
-      {/* ── PAPER wrapper: clips paper below envelope top edge when hidden ── */}
-      <div
-        className="absolute inset-x-5 z-50"
-        style={{
-          bottom: 0,
-          top: 0,
-          overflow: "hidden",
-          pointerEvents: "none",
-        }}
+      {/* ── PAPER — positioned above envelope, slides up ── */}
+      <motion.div
+        className="absolute inset-x-5 z-20"
+        // resting position: hidden behind top of envelope (bottom of paper = top of envelope)
+        style={{ bottom: 0 }}
+        animate={hovered ? { y: -(PAPER_H + 16) } : { y: 0 }}
+        transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
       >
-        <motion.div
-          className="absolute inset-x-0"
-          style={{ bottom: 0 }}
-          animate={hovered ? { y: -165 } : { y: "100%" }}
-          transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
-          style={{ pointerEvents: hovered ? "auto" : "none", bottom: 0, position: "absolute", left: 0, right: 0 }}
+        <div
+          style={{
+            background: "hsl(42 30% 97%)",
+            borderRadius: "3px 3px 0 0",
+            boxShadow: "0 -4px 20px rgba(0,0,0,0.18)",
+            border: "1px solid hsl(40 15% 87%)",
+            borderBottom: "none",
+            overflow: "hidden",
+            height: PAPER_H,
+          }}
         >
+          {/* Ruled lines */}
           <div
+            className="absolute inset-0 pointer-events-none"
             style={{
-              background: "hsl(42 30% 97%)",
-              borderRadius: "2px 2px 0 0",
-              boxShadow: "0 -6px 24px rgba(0,0,0,0.2)",
-              border: "1px solid hsl(40 15% 87%)",
-              borderBottom: "none",
-              overflow: "hidden",
+              backgroundImage:
+                "repeating-linear-gradient(0deg, transparent, transparent 23px, hsl(210 30% 85%) 23px, hsl(210 30% 85%) 24px)",
+              opacity: 0.4,
             }}
-          >
-            {/* Ruled lines */}
-            <div
-              className="absolute inset-0 pointer-events-none"
-              style={{
-                backgroundImage:
-                  "repeating-linear-gradient(0deg, transparent, transparent 23px, hsl(210 30% 85%) 23px, hsl(210 30% 85%) 24px)",
-                opacity: 0.4,
-              }}
-            />
-            {/* Left margin line */}
-            <div
-              className="absolute top-0 bottom-0 pointer-events-none"
-              style={{ left: 34, width: 1, background: "hsl(350 50% 78%)", opacity: 0.3 }}
-            />
-            <div className="relative px-5 pt-5 pb-6 pl-10">
-              <p
-                className="text-[9px] uppercase tracking-[0.28em] mb-2"
-                style={{ color: "hsl(350 40% 38%)", fontFamily: "serif" }}
-              >
-                {tag}
-              </p>
-              <h3
-                className="font-serif text-lg leading-snug mb-2"
-                style={{ color: "hsl(0 0% 7%)" }}
-              >
-                {title}
-              </h3>
-              <p className="text-xs leading-relaxed" style={{ color: "hsl(0 0% 25%)" }}>
-                {description}
-              </p>
-            </div>
+          />
+          {/* Left margin line */}
+          <div
+            className="absolute top-0 bottom-0 pointer-events-none"
+            style={{ left: 34, width: 1, background: "hsl(350 50% 78%)", opacity: 0.3 }}
+          />
+          <div className="relative px-5 pt-4 pb-4 pl-10">
+            <p
+              style={{ fontSize: 9, letterSpacing: "0.28em", textTransform: "uppercase", color: "hsl(350 40% 38%)", fontFamily: "serif", marginBottom: 8 }}
+            >
+              {tag}
+            </p>
+            <h3 className="font-serif text-base leading-snug" style={{ color: "hsl(0 0% 7%)", marginBottom: 6 }}>
+              {title}
+            </h3>
+            <p style={{ fontSize: 11, lineHeight: 1.6, color: "hsl(0 0% 25%)" }}>
+              {description}
+            </p>
           </div>
-        </motion.div>
-      </div>
+        </div>
+      </motion.div>
 
-      {/* ── ENVELOPE ── */}
+      {/* ── ENVELOPE BODY ── */}
       <div className="relative" style={{ borderRadius: 6 }}>
-
-        {/* Envelope body */}
         <div
           className="relative overflow-hidden"
           style={{
             borderRadius: 6,
             background: "hsl(42 20% 96%)",
-            boxShadow: "0 4px 6px rgba(0,0,0,0.07), 0 10px 30px rgba(0,0,0,0.13), inset 0 1px 0 rgba(255,255,255,0.8)",
+            boxShadow:
+              "0 4px 6px rgba(0,0,0,0.07), 0 10px 30px rgba(0,0,0,0.13), inset 0 1px 0 rgba(255,255,255,0.8)",
             border: "1px solid hsl(40 15% 82%)",
             minHeight: 200,
           }}
         >
-          {/* Paper texture */}
-          <div className="absolute inset-0 pointer-events-none z-0" style={{ backgroundImage: NOISE, backgroundSize: "200px 200px", opacity: 0.045 }} />
+          <div className="absolute inset-0 pointer-events-none" style={{ backgroundImage: NOISE, backgroundSize: "200px 200px", opacity: 0.045 }} />
 
-          {/* Fold lines */}
-          <svg className="absolute inset-0 w-full h-full pointer-events-none z-0" viewBox="0 0 300 200" preserveAspectRatio="none">
+          <svg className="absolute inset-0 w-full h-full pointer-events-none" viewBox="0 0 300 200" preserveAspectRatio="none">
             <line x1="0" y1="200" x2="150" y2="110" stroke="hsl(40 10% 72%)" strokeWidth="0.8" />
             <line x1="300" y1="200" x2="150" y2="110" stroke="hsl(40 10% 72%)" strokeWidth="0.8" />
             <line x1="0" y1="0" x2="150" y2="110" stroke="hsl(40 10% 76%)" strokeWidth="0.8" />
             <line x1="300" y1="0" x2="150" y2="110" stroke="hsl(40 10% 76%)" strokeWidth="0.8" />
           </svg>
 
-          {/* Ghost script title */}
-          <div className="absolute inset-0 flex items-end pointer-events-none z-0 overflow-hidden" style={{ padding: "0 16px 16px" }}>
+          <div className="absolute inset-0 flex items-end pointer-events-none overflow-hidden" style={{ padding: "0 16px 16px" }}>
             <span className="font-serif italic text-4xl leading-none" style={{ color: "hsl(0 0% 10%)", opacity: 0.07, whiteSpace: "nowrap" }}>
               {title}
             </span>
           </div>
 
-          {/* Small text left */}
-          <div className="absolute left-3 top-1/2 -translate-y-1/2 z-0 pointer-events-none" style={{ maxWidth: 58 }}>
-            <p className="text-[6px] leading-[1.6] uppercase tracking-wide" style={{ color: "hsl(0 0% 30%)", opacity: 0.3, fontFamily: "serif" }}>
+          <div className="absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" style={{ maxWidth: 58 }}>
+            <p style={{ fontSize: 6, lineHeight: 1.6, textTransform: "uppercase", letterSpacing: "0.05em", color: "hsl(0 0% 30%)", opacity: 0.3, fontFamily: "serif" }}>
               {description}
             </p>
           </div>
 
-          {/* Date top right */}
-          <div className="absolute top-3 right-4 z-0">
-            <span className="text-[9px] tracking-widest" style={{ color: "hsl(0 0% 45%)", fontFamily: "serif", opacity: 0.55 }}>{date}</span>
+          <div className="absolute top-3 right-4">
+            <span style={{ fontSize: 9, letterSpacing: "0.2em", color: "hsl(0 0% 45%)", fontFamily: "serif", opacity: 0.55 }}>{date}</span>
           </div>
 
-          {/* Lily center */}
-          <div className="absolute inset-0 flex items-center justify-center z-0 pointer-events-none">
+          <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
             <img src={LILY_URL} alt="" style={{ width: 88, height: 88, opacity: 0.11, mixBlendMode: "multiply", objectFit: "contain" }} />
           </div>
 
           <div style={{ minHeight: 200 }} />
         </div>
 
-        {/* ── FLAP ── */}
+        {/* ── FLAP — lifts back ── */}
         <motion.div
           className="absolute inset-x-0 top-0 z-30"
           style={{ transformOrigin: "top center", transformStyle: "preserve-3d" }}
-          animate={hovered ? { rotateX: -150 } : { rotateX: 0 }}
-          transition={{ duration: 0.62, ease: [0.16, 1, 0.3, 1] }}
+          animate={hovered ? { rotateX: -155 } : { rotateX: 0 }}
+          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
         >
           <div
             className="relative overflow-hidden"
@@ -179,7 +164,6 @@ function EnvelopeCard({
               height: 104,
               background: "hsl(42 18% 93%)",
               clipPath: "polygon(0 0, 100% 0, 50% 100%)",
-              boxShadow: "inset 0 -3px 10px rgba(0,0,0,0.07)",
             }}
           >
             <div className="absolute inset-0 pointer-events-none" style={{ backgroundImage: NOISE, backgroundSize: "150px 150px", opacity: 0.05 }} />
