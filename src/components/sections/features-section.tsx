@@ -118,6 +118,25 @@ function EnvelopeCard({ title, description, tag, index }: { title: string; descr
           </motion.div>
         ))}
 
+        {/* Calligraphic title — sits on top of all flaps */}
+        <div
+          className="absolute inset-0 pointer-events-none flex items-center overflow-hidden"
+          style={{ padding: "0 14px", zIndex: 28 }}
+        >
+          <span
+            className="font-serif italic leading-none select-none"
+            style={{
+              fontSize: 38,
+              color: "hsl(0 0% 8%)",
+              opacity: 0.18,
+              whiteSpace: "nowrap",
+              letterSpacing: "-0.01em",
+            }}
+          >
+            {title}
+          </span>
+        </div>
+
         {/* Crease lines over flaps */}
         <svg className="absolute inset-0 w-full h-full z-25 pointer-events-none" viewBox="0 0 300 220" preserveAspectRatio="none" style={{ zIndex: 25 }}>
           {/* dark crease */}
