@@ -8,7 +8,7 @@ export function HeroSection() {
   const navigate = useNavigate()
 
   return (
-    <section className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden bg-background px-6 py-24 gap-12">
+    <section className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden px-6 py-24 gap-12">
 
       {/* Single hero image */}
       <div className="relative flex items-center justify-center">
