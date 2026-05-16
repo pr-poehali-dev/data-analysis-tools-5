@@ -54,7 +54,7 @@ export function InsightsSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
         >
-          Блог
+          Часто задаваемые вопросы
         </motion.p>
 
         <div className="divide-y divide-border">
