@@ -51,58 +51,6 @@ function EnvelopeCard({
       transition={{ duration: 0.9, delay: index * 0.13, ease: [0.16, 1, 0.3, 1] }}
       style={{ perspective: 1000 }}
     >
-      {/* ── PAPER — slides up from inside ── */}
-      <motion.div
-        className="absolute inset-x-5 z-20"
-        style={{ bottom: 12 }}
-        animate={hovered ? { y: -155 } : { y: 0 }}
-        transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
-      >
-        <div
-          className="relative"
-          style={{
-            background: "hsl(42 30% 97%)",
-            borderRadius: "2px 2px 0 0",
-            boxShadow: "0 -4px 20px rgba(0,0,0,0.18), 0 2px 8px rgba(0,0,0,0.1)",
-            border: "1px solid hsl(40 15% 87%)",
-            borderBottom: "none",
-            overflow: "hidden",
-          }}
-        >
-          {/* Ruled lines */}
-          <div
-            className="absolute inset-0 pointer-events-none"
-            style={{
-              backgroundImage:
-                "repeating-linear-gradient(0deg, transparent, transparent 23px, hsl(210 30% 85%) 23px, hsl(210 30% 85%) 24px)",
-              opacity: 0.4,
-            }}
-          />
-          {/* Left margin line */}
-          <div
-            className="absolute top-0 bottom-0 pointer-events-none"
-            style={{ left: 36, width: 1, background: "hsl(350 50% 78%)", opacity: 0.35 }}
-          />
-          <div className="relative px-6 pt-5 pb-7 pl-10">
-            <p
-              className="text-[9px] uppercase tracking-[0.28em] mb-3"
-              style={{ color: "hsl(350 40% 38%)", fontFamily: "serif" }}
-            >
-              {tag}
-            </p>
-            <h3
-              className="font-serif text-lg leading-snug mb-2"
-              style={{ color: "hsl(0 0% 7%)" }}
-            >
-              {title}
-            </h3>
-            <p className="text-xs leading-relaxed" style={{ color: "hsl(0 0% 25%)" }}>
-              {description}
-            </p>
-          </div>
-        </div>
-      </motion.div>
-
       {/* ── ENVELOPE BODY ── */}
       <div className="relative" style={{ borderRadius: 6 }}>
         <div
@@ -116,6 +64,57 @@ function EnvelopeCard({
             minHeight: 200,
           }}
         >
+          {/* ── PAPER — hidden inside, slides up on hover ── */}
+          <motion.div
+            className="absolute inset-x-4 z-20"
+            style={{ bottom: 0 }}
+            animate={hovered ? { y: -150 } : { y: "100%" }}
+            transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
+          >
+            <div
+              className="relative"
+              style={{
+                background: "hsl(42 30% 97%)",
+                borderRadius: "2px 2px 0 0",
+                boxShadow: "0 -4px 20px rgba(0,0,0,0.18)",
+                border: "1px solid hsl(40 15% 87%)",
+                borderBottom: "none",
+                overflow: "hidden",
+              }}
+            >
+              {/* Ruled lines */}
+              <div
+                className="absolute inset-0 pointer-events-none"
+                style={{
+                  backgroundImage:
+                    "repeating-linear-gradient(0deg, transparent, transparent 23px, hsl(210 30% 85%) 23px, hsl(210 30% 85%) 24px)",
+                  opacity: 0.4,
+                }}
+              />
+              {/* Left margin line */}
+              <div
+                className="absolute top-0 bottom-0 pointer-events-none"
+                style={{ left: 36, width: 1, background: "hsl(350 50% 78%)", opacity: 0.35 }}
+              />
+              <div className="relative px-6 pt-5 pb-7 pl-10">
+                <p
+                  className="text-[9px] uppercase tracking-[0.28em] mb-3"
+                  style={{ color: "hsl(350 40% 38%)", fontFamily: "serif" }}
+                >
+                  {tag}
+                </p>
+                <h3
+                  className="font-serif text-lg leading-snug mb-2"
+                  style={{ color: "hsl(0 0% 7%)" }}
+                >
+                  {title}
+                </h3>
+                <p className="text-xs leading-relaxed" style={{ color: "hsl(0 0% 25%)" }}>
+                  {description}
+                </p>
+              </div>
+            </div>
+          </motion.div>
           {/* Paper noise texture */}
           <div
             className="absolute inset-0 pointer-events-none z-10"
